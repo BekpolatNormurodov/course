@@ -31,9 +31,10 @@ class _SmsCodePageState extends State<SmsCodePage> {
       width: 48.w,
       height: 48.w,
       textStyle: TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w700,
+        fontSize: 18.sp,
+        fontWeight: FontWeight.w600,
         color: Colors.black87,
+        fontFamily: 'Regular',
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -42,6 +43,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
     );
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -105,8 +107,8 @@ class _SmsCodePageState extends State<SmsCodePage> {
                     fontFamily: 'Regular',
                   ),
                 ),
-                SizedBox(height: 36.h),
-
+                SizedBox(height: 80.h),
+                  
                 // “Kodini kiriting” sarlavha
                 Center(
                   child: Text(
@@ -119,41 +121,49 @@ class _SmsCodePageState extends State<SmsCodePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 12.h),
-
+                SizedBox(height: 16.h),
+                  
                 // 6 ta OTP katak
                 Center(
                   child: Pinput(
-                    obscuringWidget: Text("p"),
                     length: 6,
                     controller: _pinController,
                     focusNode: _focusNode,
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: defaultPinTheme.copyDecorationWith(
-                      border: Border.all(color: blue, width: 1.2.w),
+                      border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.5), width: 0.8.w),
                       color: Color.fromRGBO(238, 240, 245, 1),
                     ),
                     submittedPinTheme: defaultPinTheme,
                     separatorBuilder: (index) => SizedBox(width: 12.w),
                     showCursor: true,
                     keyboardType: TextInputType.number,
+                    preFilledWidget: Text(
+                      "0",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromRGBO(0, 0, 0, 0.3),
+                        fontFamily: 'Regular',
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(height: 16.h),
-
+                SizedBox(height: 24.h),
+                  
                 // Taymer
                 Center(
                   child: Text(
                     timerText,
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontFamily: 'Regular',
                     ),
                   ),
                 ),
-
-                // Davom ettish tugmasi (ko‘k, pill rounded)
+                  
               ],
             ),
             Column(
@@ -181,7 +191,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   ),
                 ),
                 SizedBox(height: 12.h),
-
+              
                 // Ikkinchi kulrang tugma
                 SizedBox(
                   width: double.infinity,
@@ -209,7 +219,11 @@ class _SmsCodePageState extends State<SmsCodePage> {
                         ),
                         Text(
                           'Boshqa raqam kiritish',
-                          style: TextStyle(fontSize: 16.sp, fontFamily: 'Regular', fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontFamily: 'Regular',
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         SizedBox(),
                       ],

@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 50.h),
                 // Logo
                 Container(
-                  width: 181.w,
+                  width: 180.w,
                   height: 100.h,
                   decoration: BoxDecoration(color: Colors.white),
                   alignment: Alignment.center,
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 100.h),
+              padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 60.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
