@@ -12,11 +12,44 @@ class _SmsCodePageState extends State<SmsCodePage> {
   final _pinController = TextEditingController();
   final _focusNode = FocusNode();
 
-  // taymer ko‘rinishi (demo uchun 00:00)
-  String timerText = '00:00';
+  static int initialSeconds = 179;
+  int secondsLeft = initialSeconds;
+  Timer? _timer;
+
+  void startCountdown() {
+    _timer?.cancel();
+    setState(() => secondsLeft = initialSeconds);
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (!mounted) return;
+      if (secondsLeft <= 1) {
+        t.cancel();
+        setState(() => secondsLeft = 0);
+      } else {
+        setState(() => secondsLeft--);
+      }
+    });
+  }
+
+  Future<void> sendSmsAgain() async {
+    startCountdown();
+  }
+
+  String format(int totalSeconds) {
+    final m = (totalSeconds ~/ 60).toString().padLeft(2, '0');
+    final s = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startCountdown(); // sahifa ochilganda sanashni boshlaydi
+  }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _pinController.dispose();
     _focusNode.dispose();
     super.dispose();
@@ -42,6 +75,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
       ),
     );
 
+    final canResend = secondsLeft == 0;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -108,7 +142,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   ),
                 ),
                 SizedBox(height: 80.h),
-                  
+
                 // “Kodini kiriting” sarlavha
                 Center(
                   child: Text(
@@ -122,7 +156,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-                  
+
                 // 6 ta OTP katak
                 Center(
                   child: Pinput(
@@ -131,7 +165,10 @@ class _SmsCodePageState extends State<SmsCodePage> {
                     focusNode: _focusNode,
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: defaultPinTheme.copyDecorationWith(
-                      border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.5), width: 0.8.w),
+                      border: Border.all(
+                        color: Color.fromRGBO(0, 0, 0, 0.5),
+                        width: 0.8.w,
+                      ),
                       color: Color.fromRGBO(238, 240, 245, 1),
                     ),
                     submittedPinTheme: defaultPinTheme,
@@ -149,21 +186,34 @@ class _SmsCodePageState extends State<SmsCodePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 24.h),
-                  
+                SizedBox(height: 30.h),
+
                 // Taymer
-                Center(
-                  child: Text(
-                    timerText,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      fontFamily: 'Regular',
+                !canResend
+                    ? Center(
+                      child: Text(
+                        format(secondsLeft),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Regular',
+                        ),
+                      ),
+                    )
+                    : Center(
+                      child: GestureDetector(
+                        onTap: canResend ? sendSmsAgain : null,
+                        child: Text(
+                          'Qayta yuborish',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromRGBO(53, 114, 237, 1),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                  
               ],
             ),
             Column(
@@ -191,7 +241,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   ),
                 ),
                 SizedBox(height: 12.h),
-              
+
                 // Ikkinchi kulrang tugma
                 SizedBox(
                   width: double.infinity,

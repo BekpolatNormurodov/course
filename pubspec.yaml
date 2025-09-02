@@ -39,6 +39,7 @@ dependencies:
   get: ^4.7.2
   google_fonts: ^6.3.1
   flutter_screenutil: ^5.9.3
+  mask_text_input_formatter: ^2.9.0
 
 dev_dependencies:
   flutter_test:

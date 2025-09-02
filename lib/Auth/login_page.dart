@@ -9,6 +9,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController controller = TextEditingController(text: '+998');
+  final phoneMask = MaskTextInputFormatter(
+    mask: '+998 (##) ###-##-##',
+    filter: {"#": RegExp(r'\d')},
+    type: MaskAutoCompletionType.lazy,
+  );
+
+  String formatPhone(String input) {
+    // Masalan input: "999999999"
+    if (input.length != 9) return input;
+
+    final code = input.substring(0, 2); // 99
+    final part1 = input.substring(2, 5); // 999
+    final part2 = input.substring(5, 7); // 99
+    final part3 = input.substring(7, 9); // 99
+
+    return '+998 $code $part1 $part2 $part3';
+  }
+
   @override
   Widget build(BuildContext context) {
     Color blue = Color.fromRGBO(53, 114, 237, 1);
@@ -131,10 +149,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 8.h),
                   // Phone input
-                  TextField(
+                  TextFormField(
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [phoneMask],
                     cursorColor: Color.fromRGBO(0, 0, 0, 0.8),
                     controller: controller,
-                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(238, 240, 245, 1),
@@ -151,7 +170,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(color: Color.fromRGBO(0, 0, 0, .5), width: 0.5.w),
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(0, 0, 0, .5),
+                          width: 0.5.w,
+                        ),
                       ),
                     ),
                   ),
@@ -162,8 +184,12 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 48.h,
                     child: ElevatedButton(
-                      onPressed:
-                          () => Get.to(SmsCodePage(phone: "+998 97 628 28 82")),
+                      onPressed: () {
+                        final raw =
+                            phoneMask
+                                .getUnmaskedText(); // raqamni maskasiz holatga qaytaradi.
+                        Get.to(SmsCodePage(phone: formatPhone(raw)));
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: blue,
                         foregroundColor: Colors.white,
@@ -211,8 +237,16 @@ class _AuthButton extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
-              BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.08), blurRadius: 2.r, offset: Offset(1, 1)),
-              BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.08), blurRadius: 2.r, offset: Offset(-1, -1)),
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.08),
+                blurRadius: 2.r,
+                offset: Offset(1, 1),
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.08),
+                blurRadius: 2.r,
+                offset: Offset(-1, -1),
+              ),
             ],
           ),
           padding: EdgeInsets.symmetric(horizontal: 14.w),
