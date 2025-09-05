@@ -24,7 +24,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 70.h,
+        toolbarHeight: 80.h,
         elevation: 0,
         backgroundColor: Colors.white,
         titleSpacing: 16.w,
@@ -39,10 +39,24 @@ class _AsosiyPageState extends State<AsosiyPage> {
           ),
         ),
         actions: [
-          _AppIcon(icon: Icons.search),
-          SizedBox(width: 12.w),
-          _AppIcon(icon: Icons.notifications_none),
-          SizedBox(width: 10.w),
+          GestureDetector(
+            onTap: () {},
+            child: Image.asset(
+              "assets/icons/search.png",
+              width: 22.w,
+              height: 22.w,
+            ),
+          ),
+          SizedBox(width: 26.w),
+          GestureDetector(
+            onTap: () {},
+            child: Image.asset(
+              "assets/icons/sound.png",
+              width: 22.w,
+              height: 22.w,
+            ),
+          ),
+          SizedBox(width: 16.w),
         ],
       ),
 
@@ -64,7 +78,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
             title: 'Top kurslar',
             subtitle: 'Eng ko‘p sotib olingan video darslar',
           ),
-          kurslarList(),
+          KursBanner().kursList("1 200 000"),
           // ---------- Yangi kurslar ----------
           _SectionHeader(
             title: 'Yangi kurslar',
@@ -72,7 +86,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
             topPadding: 14.h,
           ),
 
-          kurslarList(),
+          KursBanner().kursList("1 200 000"),
 
           // ---------- Dasturlash bo‘yicha ----------
           _SectionHeader(
@@ -81,11 +95,8 @@ class _AsosiyPageState extends State<AsosiyPage> {
             topPadding: 14.h,
             withSubtitle: false,
           ),
-          kurslarList(),
-
+          KursBanner().kursList("1 200 000"),
           SizedBox(height: 16.h),
-
-          // ---------- Promo kartacha ----------
           Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
@@ -150,7 +161,10 @@ class _AsosiyPageState extends State<AsosiyPage> {
                 ),
                 SizedBox(height: 20.h),
                 Center(
-                  child: Image.asset("assets/teacher.png", fit: BoxFit.cover),
+                  child: Image.asset(
+                    "assets/images/teacher.png",
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ],
             ),
@@ -158,17 +172,6 @@ class _AsosiyPageState extends State<AsosiyPage> {
         ],
       ),
     );
-  }
-}
-
-// ====== UI Bo'laklari ======
-
-class _AppIcon extends StatelessWidget {
-  final IconData icon;
-  _AppIcon({required this.icon});
-  @override
-  Widget build(BuildContext context) {
-    return Icon(icon, color: Color.fromRGBO(0, 0, 0, 0.5), size: 26.sp);
   }
 }
 
@@ -236,7 +239,7 @@ class _BannerCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/chegirma.png'),
+                    image: AssetImage('assets/images/chegirma.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -312,163 +315,4 @@ class _SectionHeader extends StatelessWidget {
       ),
     );
   }
-}
-
-kurslarList() {
-  return Container(
-    margin: EdgeInsets.only(top: 8.h, left: 10.w),
-    height: 300.h,
-    child: ListView.builder(
-      itemCount: 10,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
-          child: Container(
-            width: 170.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Rasm (tepada)
-                SizedBox(
-                  child: Image.asset('assets/kurs.png', fit: BoxFit.cover),
-                ),
-
-                // Kontent
-                Padding(
-                  padding: EdgeInsets.only(top: 12.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Muallif
-                      Text(
-                        "Sardor Qodirov",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: 'Regular',
-                          color: Color.fromRGBO(95, 100, 110, 1),
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-
-                      // Sarlavha
-                      Container(
-                        padding: EdgeInsets.only(right: 6.w),
-                        height: 30,
-                        child: Text(
-                          "Java dasturlash tili asoslari",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            height: 1.2.h,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-
-                      // Yulduzlar + (5)
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Color(0xFFFFC107),
-                          ),
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Color(0xFFFFC107),
-                          ),
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Color(0xFFFFC107),
-                          ),
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Color(0xFFFFC107),
-                          ),
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Color(0xFFFFC107),
-                          ),
-                          SizedBox(width: 6.w),
-                          Text(
-                            '(5)',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: Color.fromRGBO(95, 100, 110, 1),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8.h),
-
-                      // Narx
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "1 200 000",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blueAccent,
-                              letterSpacing: .2,
-                            ),
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            'UZS',
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              color: Color.fromRGBO(0, 0, 0, 0.4),
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8.h),
-
-                      // Statistikalar
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.play_circle_fill,
-                            size: 18.sp,
-                            color: Color.fromRGBO(0, 0, 0, 0.3),
-                          ),
-                          SizedBox(width: 6.w),
-                          Text('38', style: TextStyle(fontSize: 14.sp)),
-                          SizedBox(width: 22.w),
-                          Icon(
-                            Icons.person_outline,
-                            size: 18.sp,
-                            color: Color.fromRGBO(0, 0, 0, 0.3),
-                          ),
-                          SizedBox(width: 6.w),
-                          Text('58', style: TextStyle(fontSize: 14.sp)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    ),
-  );
 }

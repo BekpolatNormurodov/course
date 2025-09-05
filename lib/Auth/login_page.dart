@@ -257,7 +257,7 @@ class _AuthButton extends StatelessWidget {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/$icon.png")),
+                  image: DecorationImage(image: AssetImage("assets/icons/$icon.png")),
                 ),
               ),
               SizedBox(width: 12),

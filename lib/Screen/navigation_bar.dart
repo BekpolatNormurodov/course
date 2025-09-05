@@ -12,7 +12,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
 
   @override
   Widget build(BuildContext context) {
-    List page = [LoginPage()];
+    List page = [AsosiyPage(), KurslarPage()];
     return Scaffold(
       body: page[_currentIndex],
       bottomNavigationBar: _BottomBar(

@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.rubikTextTheme(Theme.of(context).textTheme),
+          useMaterial3: true,
         ),
         home: NavigatorBar(),
       ),

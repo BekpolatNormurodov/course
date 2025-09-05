@@ -80,21 +80,23 @@ class _SmsCodePageState extends State<SmsCodePage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 80.h,
         backgroundColor: Colors.white,
         elevation: 0,
-        leadingWidth: 56.w,
+        leadingWidth: 64.w,
         centerTitle: true,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 12.w),
-          child: InkWell(
-            onTap: () {},
-            borderRadius: BorderRadius.circular(10.r),
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Container(
+            alignment: Alignment.center,
             child: Container(
+              width: 34.w,
+              height: 34.w,
               decoration: BoxDecoration(
-                color: Color(0xFFF3F4F6),
-                borderRadius: BorderRadius.circular(10.r),
+                color: Color.fromRGBO(238, 240, 245, 1),
+                borderRadius: BorderRadius.circular(8.r),
               ),
-              margin: EdgeInsets.symmetric(vertical: 8.h),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               alignment: Alignment.center,
               child: Icon(
                 Icons.arrow_back_ios_new,
