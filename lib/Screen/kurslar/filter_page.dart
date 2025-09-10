@@ -1,14 +1,14 @@
 import 'package:course/library.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({super.key});
+   FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
 }
 
 class _FilterPageState extends State<FilterPage> {
-  final List<String> teachers = const [
+  final List<String> teachers =  [
     'Sardor Qodirov',
     'Isxoqjon Ahmedov',
     'Ahmadjon Xashimov',
@@ -40,13 +40,13 @@ class _FilterPageState extends State<FilterPage> {
     final checkboxTheme = CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.r)),
       side: BorderSide(color: kBlue, width: 1.4.w),
-      checkColor: const WidgetStatePropertyAll(Colors.white),
+      checkColor:  WidgetStatePropertyAll(Colors.white),
       fillColor: WidgetStateProperty.resolveWith<Color?>(
         (states) =>
             states.contains(WidgetState.selected) ? kBlue : Colors.transparent,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+      visualDensity:  VisualDensity(horizontal: -4, vertical: -4),
     );
     return Theme(
       data: Theme.of(context).copyWith(checkboxTheme: checkboxTheme),
@@ -90,7 +90,7 @@ class _FilterPageState extends State<FilterPage> {
         ),
       
         body: ListView(
-          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 16.h),
+          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 60.h),
           children: [
             // O‘qituvchilar
             _SectionCard(
@@ -197,10 +197,10 @@ class _FilterPageState extends State<FilterPage> {
                     }).toList(),
               ),
             ),
-      
+            SizedBox(height: 12.h),
             // Saqlash
             SizedBox(
-              height: 50.h,
+              height: 48.h,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -231,7 +231,7 @@ class _FilterPageState extends State<FilterPage> {
 class _SectionCard extends StatelessWidget {
   final String title;
   final Widget child;
-  const _SectionCard({required this.title, required this.child});
+   _SectionCard({required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -266,7 +266,7 @@ class _CheckRow extends StatelessWidget {
   final String label;
   final bool value;
   final ValueChanged<bool?> onChanged;
-  const _CheckRow({
+   _CheckRow({
     required this.label,
     required this.value,
     required this.onChanged,

@@ -18,6 +18,8 @@ export 'package:course/Screen/navigation_bar.dart';
 export 'package:course/Screen/Asosiy/asosiy_page.dart';
 export 'package:course/Screen/kurslar/kurslar_page.dart';
 export 'package:course/Screen/kurslar/filter_page.dart';
+export 'package:course/Screen/Asosiy/about_course_page.dart';
+
 
 // Class
 export 'package:course/class/kurs_banner.dart';
