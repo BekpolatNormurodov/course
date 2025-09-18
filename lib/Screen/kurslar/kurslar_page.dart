@@ -100,7 +100,7 @@ class _KurslarPageState extends State<KurslarPage> {
             ),
           ),
           SizedBox(height: 6.h),
-          Expanded(child: KursBanner().kursGrid(narxlar[selectedFilter])),
+          Expanded(child: KursBannerClass().kursGrid(narxlar[selectedFilter])),
         ],
       ),
     );

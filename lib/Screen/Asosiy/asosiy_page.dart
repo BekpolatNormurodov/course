@@ -78,7 +78,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
             title: 'Top kurslar',
             subtitle: 'Eng ko‘p sotib olingan video darslar',
           ),
-          KursBanner().kursList("1 200 000"),
+          KursBannerClass().kursList("1 200 000"),
           // ---------- Yangi kurslar ----------
           _SectionHeader(
             title: 'Yangi kurslar',
@@ -86,7 +86,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
             topPadding: 14.h,
           ),
 
-          KursBanner().kursList("1 200 000"),
+          KursBannerClass().kursList("1 200 000"),
 
           // ---------- Dasturlash bo‘yicha ----------
           _SectionHeader(
@@ -95,7 +95,7 @@ class _AsosiyPageState extends State<AsosiyPage> {
             topPadding: 14.h,
             withSubtitle: false,
           ),
-          KursBanner().kursList("1 200 000"),
+          KursBannerClass().kursList("1 200 000"),
           SizedBox(height: 16.h),
           Container(
             width: double.infinity,

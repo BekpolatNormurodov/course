@@ -1,6 +1,6 @@
 import 'package:course/library.dart';
 
-class KursBanner {
+class KursBannerClass {
   kursGrid(narx) {
     return GridView.builder(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),

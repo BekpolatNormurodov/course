@@ -1,7 +1,7 @@
 import 'package:course/library.dart';
 
 class AboutCoursePage extends StatefulWidget {
-  const AboutCoursePage({super.key});
+  AboutCoursePage({super.key});
 
   @override
   State<AboutCoursePage> createState() => _AboutCoursePageState();
@@ -15,32 +15,35 @@ class _AboutCoursePageState extends State<AboutCoursePage> {
       title: 'Kurs haqida',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: const Color(0xFF2563EB),
+        primaryColor: Color(0xFF2563EB),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2563EB),
-          primary: const Color(0xFF2563EB),
+          seedColor: Color(0xFF2563EB),
+          primary: Color(0xFF2563EB),
         ),
-        textTheme: const TextTheme(
-          headlineSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-          titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
-          titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-          titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-          bodyMedium: TextStyle(fontSize: 14, color: Color(0xFF333333)),
-          bodySmall: TextStyle(fontSize: 12, color: Color(0xFF666666)),
+        textTheme: TextTheme(
+          headlineSmall: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w700,
+          ),
+          titleLarge: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800),
+          titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
+          titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+          bodyMedium: TextStyle(fontSize: 14.sp, color: Color(0xFF333333)),
+          bodySmall: TextStyle(fontSize: 12.sp, color: Color(0xFF666666)),
           labelLarge: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
         ),
       ),
-      home: const CourseDetailsPage(),
+      home: CourseDetailsPage(),
     );
   }
 }
 
 class CourseDetailsPage extends StatelessWidget {
-  const CourseDetailsPage({super.key});
+  CourseDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +84,22 @@ class CourseDetailsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const SafeArea(child: _CourseScrollBody()),
+      body: SafeArea(child: _CourseScrollBody()),
     );
   }
 }
 
-class _CourseScrollBody extends StatelessWidget {
-  const _CourseScrollBody();
+class _CourseScrollBody extends StatefulWidget {
+  _CourseScrollBody();
+
+  @override
+  State<_CourseScrollBody> createState() => _CourseScrollBodyState();
+}
+
+class _CourseScrollBodyState extends State<_CourseScrollBody> {
+  bool aboutActive = true;
+  bool themesActive = false;
+  bool izohlarActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -96,13 +108,12 @@ class _CourseScrollBody extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Title & author
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 18),
+                padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 18.h),
                 child: Text(
                   'Super Photoshop',
                   style: theme.textTheme.titleLarge!.copyWith(
@@ -111,7 +122,7 @@ class _CourseScrollBody extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
                 child: Row(
                   children: [
                     CircleAvatar(
@@ -124,7 +135,7 @@ class _CourseScrollBody extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8.w),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -186,12 +197,12 @@ class _CourseScrollBody extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.person_outline_outlined,
-                                      size: 18,
+                                      size: 18.sp,
                                       color: Color.fromRGBO(169, 191, 246, 1),
                                     ),
-                                    const SizedBox(width: 4),
+                                    SizedBox(width: 4.w),
                                     Text(
                                       '915',
                                       style: TextStyle(
@@ -204,12 +215,12 @@ class _CourseScrollBody extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.comment_outlined,
-                                      size: 18,
+                                      size: 18.sp,
                                       color: Color.fromRGBO(169, 191, 246, 1),
                                     ),
-                                    const SizedBox(width: 4),
+                                    SizedBox(width: 4.w),
                                     Text(
                                       '915',
                                       style: TextStyle(
@@ -229,19 +240,15 @@ class _CourseScrollBody extends StatelessWidget {
                   ],
                 ),
               ),
-
-              const SizedBox(height: 30),
-
+              SizedBox(height: 6.h),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
                 child: Image.asset("assets/images/kursbanner.png"),
               ),
 
-              const SizedBox(height: 24),
-
               // Stats grid
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   children: [
                     _StatRow(
@@ -249,31 +256,31 @@ class _CourseScrollBody extends StatelessWidget {
                       label: 'Mavzular soni:',
                       value: '38',
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 18.h),
                     _StatRow(
                       icon: "davomiylik",
                       label: 'Davomiyligi:',
                       value: '12:14:40',
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 18.h),
                     _StatRow(
                       icon: "language",
                       label: 'Til:',
                       value: "O'zbek tilida",
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 18.h),
                     _StatRow(
                       icon: "daraja",
                       label: 'Daraja:',
                       value: 'Boshlang\'ich',
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 18.h),
                     _StatRow(
                       icon: "azolar",
                       label: 'A\'zolikning davomiyligi:',
                       value: '1 yil',
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 18.h),
                     _StatRow(
                       icon: "sertifikat",
                       label: 'Sertifikat:',
@@ -286,22 +293,8 @@ class _CourseScrollBody extends StatelessWidget {
 
               // Price + button
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 18,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          _PriceRow(oldPrice: '400 000', price: '280 000 '),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 18.h),
+                child: _PriceRow(oldPrice: '400 000', price: '280 000 '),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -329,71 +322,66 @@ class _CourseScrollBody extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 30.h),
-
               // Tabs mock
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _TabChip(label: 'Kurs haqida', active: true),
-                    SizedBox(width: 4.w),
-                    _TabChip(label: 'Mavzular'),
-                    SizedBox(width: 4.w),
-                    _TabChip(label: 'Izohlar'),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 24.h),
-
-              // About text
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  "Ushbu kurs davomida siz dasturni o'rnatishdan tortib, so'nggi trenddagi dizaynlarni tayyorlashni o'rganib olasiz. Barcha videolarni ko'rib, o'rgangan olganlaringizdan so'ng bemalol pulli buyurtmalarni qabul qilishga mumkin",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-
-              SizedBox(height: 24.h),
-
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Bu kursda nimalarni o\'rganasiz?',
-                      style: theme.textTheme.titleMedium,
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 16.w,
+                      right: 16.w,
+                      top: 24.h,
                     ),
-                    SizedBox(height: 14.h),
-                    _CheckLine(text: 'Photoshop asoslarini bilib olasiz'),
-                    _CheckLine(text: 'SMM dizayn tayyorlay olasiz'),
-                    _CheckLine(text: 'Grafik dizayn bilan ishlay olasiz'),
-                    _CheckLine(text: 'Va barcha dizayn ishlarini qila olasiz'),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 6.h),
-
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Bu kursda nimalarni o\'rganasiz?',
-                      style: theme.textTheme.titleMedium,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              aboutActive = true;
+                              themesActive = false;
+                              izohlarActive = false;
+                            });
+                          },
+                          child: TabChip(
+                            label: 'Kurs haqida',
+                            active: aboutActive,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              aboutActive = false;
+                              themesActive = true;
+                              izohlarActive = false;
+                            });
+                          },
+                          child: TabChip(
+                            label: 'Mavzular',
+                            active: themesActive,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              aboutActive = false;
+                              themesActive = false;
+                              izohlarActive = true;
+                            });
+                          },
+                          child: TabChip(
+                            label: 'Izohlar',
+                            active: izohlarActive,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 12.h),
-                    _BulletLine(text: 'Kompyuter'),
-                    _BulletLine(text: 'Ishlatyoq'),
-                    _BulletLine(text: 'Internet'),
-                  ],
-                ),
+                  ),
+                  aboutActive
+                      ? TabChipItem().about(context, theme)
+                      : themesActive
+                      ? TabChipItem().themes()
+                      : TabChipItem().izohlar(),
+                ],
               ),
             ],
           ),
@@ -404,7 +392,7 @@ class _CourseScrollBody extends StatelessWidget {
 }
 
 class _StatRow extends StatelessWidget {
-  const _StatRow({
+  _StatRow({
     required this.icon,
     required this.label,
     required this.value,
@@ -444,7 +432,7 @@ class _StatRow extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-              if (trailing != null) ...[const SizedBox(width: 4), trailing!],
+              if (trailing != null) ...[SizedBox(width: 4.w), trailing!],
             ],
           ),
         ),
@@ -454,7 +442,7 @@ class _StatRow extends StatelessWidget {
 }
 
 class _PriceRow extends StatelessWidget {
-  const _PriceRow({required this.oldPrice, required this.price});
+  _PriceRow({required this.oldPrice, required this.price});
   final String oldPrice;
   final String price;
 
@@ -466,7 +454,7 @@ class _PriceRow extends StatelessWidget {
           "Narxi:",
           style: TextStyle(
             color: Color.fromRGBO(95, 100, 110, 1),
-            fontSize: 20,
+            fontSize: 20.sp,
             fontFamily: "Regular",
             fontWeight: FontWeight.w500,
           ),
@@ -505,103 +493,6 @@ class _PriceRow extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _TabChip extends StatelessWidget {
-  const _TabChip({required this.label, this.active = false});
-  final String label;
-  final bool active;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: 38,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: active ? Color.fromRGBO(53, 114, 237, 1) : Colors.white,
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            color:
-                active
-                    ? Color.fromRGBO(253, 254, 255, 1)
-                    : Color.fromRGBO(27, 29, 36, 1),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _CheckLine extends StatelessWidget {
-  const _CheckLine({required this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 18.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.check_circle_outline,
-            size: 22.sp,
-            color: Color.fromRGBO(82, 125, 236, 1),
-          ),
-          SizedBox(width: 10.w),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Color.fromRGBO(95, 100, 110, 1),
-                fontFamily: 'Regular',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BulletLine extends StatelessWidget {
-  const _BulletLine({required this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        children: [
-          Icon(
-            Icons.star,
-            size: 10.sp,
-            color: Color.fromRGBO(229, 0, 0, 1),
-          ),
-          SizedBox(width: 10.w),
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Color.fromRGBO(95, 100, 110, 1),
-                fontFamily: 'Regular',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
