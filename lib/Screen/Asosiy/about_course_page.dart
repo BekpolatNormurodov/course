@@ -123,121 +123,124 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 30.r,
-                      backgroundImage: AssetImage('assets/images/Ellipse.png'),
-                      // If you don't have assets, fallback color shows a circle
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(width: 8.w),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                child: GestureDetector(
+                  onTap: () => Get.to(AboutMuallifPage()),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30.r,
+                        backgroundImage: AssetImage('assets/images/Ellipse.png'),
+                        // If you don't have assets, fallback color shows a circle
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(width: 8.w),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Muallif',
+                                      style: theme.textTheme.bodySmall,
+                                    ),
+                                    Text(
+                                      'Baxtiyor Samandarov',
+                                      style: theme.textTheme.titleSmall,
+                                    ),
+                                  ],
+                                ),
+                                // rating + students + like icon
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6.w, right: 10.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Muallif',
-                                    style: theme.textTheme.bodySmall,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        size: 16.sp,
+                                        color: Color(0xFFFFC107),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 16.sp,
+                                        color: Color(0xFFFFC107),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 16.sp,
+                                        color: Color(0xFFFFC107),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 16.sp,
+                                        color: Color(0xFFFFC107),
+                                      ),
+                                      Icon(
+                                        Icons.star,
+                                        size: 16.sp,
+                                        color: Color(0xFFFFC107),
+                                      ),
+                                      SizedBox(width: 6.w),
+                                      Text(
+                                        '(5)',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Color.fromRGBO(95, 100, 110, 1),
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'Baxtiyor Samandarov',
-                                    style: theme.textTheme.titleSmall,
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_outline_outlined,
+                                        size: 18.sp,
+                                        color: Color.fromRGBO(169, 191, 246, 1),
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        '915',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13.sp,
+                                          fontFamily: 'Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.comment_outlined,
+                                        size: 18.sp,
+                                        color: Color.fromRGBO(169, 191, 246, 1),
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        '915',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13.sp,
+                                          fontFamily: 'Regular',
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              // rating + students + like icon
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 6.w, right: 10.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.sp,
-                                      color: Color(0xFFFFC107),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.sp,
-                                      color: Color(0xFFFFC107),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.sp,
-                                      color: Color(0xFFFFC107),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.sp,
-                                      color: Color(0xFFFFC107),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.sp,
-                                      color: Color(0xFFFFC107),
-                                    ),
-                                    SizedBox(width: 6.w),
-                                    Text(
-                                      '(5)',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        color: Color.fromRGBO(95, 100, 110, 1),
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.person_outline_outlined,
-                                      size: 18.sp,
-                                      color: Color.fromRGBO(169, 191, 246, 1),
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      '915',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13.sp,
-                                        fontFamily: 'Regular',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.comment_outlined,
-                                      size: 18.sp,
-                                      color: Color.fromRGBO(169, 191, 246, 1),
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      '915',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13.sp,
-                                        fontFamily: 'Regular',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 6.h),
