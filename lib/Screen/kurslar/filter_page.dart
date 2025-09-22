@@ -55,6 +55,7 @@ class _FilterPageState extends State<FilterPage> {
         appBar: AppBar(
           toolbarHeight: 70.h,
           backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
           elevation: 0,
           leadingWidth: 64.w,
           centerTitle: true,

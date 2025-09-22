@@ -14,6 +14,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         toolbarHeight: 70.h,
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
         elevation: 0,
         leadingWidth: 64.w,
@@ -59,17 +60,22 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 4.h,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Profil rasmi
                       CircleAvatar(
                         radius: 50.r,
-                        backgroundImage: AssetImage("assets/images/Ellipse.png"),
+                        backgroundImage: AssetImage(
+                          "assets/images/Ellipse.png",
+                        ),
                       ),
                       SizedBox(height: 12.h),
-            
+
                       // Ism
                       Text(
                         "Sardor Qodirov",
@@ -81,7 +87,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ),
                       ),
                       SizedBox(height: 12.h),
-            
+
                       // Lavozim
                       Text(
                         "Full stack dizayner",
@@ -93,7 +99,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ),
                       ),
                       SizedBox(height: 24.h),
-            
+
                       // Statistika
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -142,7 +148,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ],
                       ),
                       SizedBox(height: 24.h),
-            
+
                       // Bio matn
                       Text(
                         "Ismim Sardor Qodirov (KADIROV). Grafik va veb dizaynerman.\n\n"

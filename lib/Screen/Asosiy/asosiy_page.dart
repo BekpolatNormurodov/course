@@ -24,9 +24,10 @@ class _AsosiyPageState extends State<AsosiyPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+      surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.white,
         toolbarHeight: 80.h,
         elevation: 0,
-        backgroundColor: Colors.white,
         titleSpacing: 16.w,
         centerTitle: false,
         title: Text(

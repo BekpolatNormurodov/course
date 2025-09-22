@@ -23,7 +23,7 @@ class _KurslarPageState extends State<KurslarPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80.h,
-        elevation: 0,
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
         titleSpacing: 16.w,
         centerTitle: false,

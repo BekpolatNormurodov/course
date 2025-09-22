@@ -49,8 +49,9 @@ class CourseDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70.h,
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
+        toolbarHeight: 70.h,
         elevation: 0,
         leadingWidth: 64.w,
         centerTitle: true,
