@@ -1,14 +1,14 @@
 import 'package:course/library.dart';
 
 class FilterPage extends StatefulWidget {
-   FilterPage({super.key});
+  FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
 }
 
 class _FilterPageState extends State<FilterPage> {
-  final List<String> teachers =  [
+  final List<String> teachers = [
     'Sardor Qodirov',
     'Isxoqjon Ahmedov',
     'Ahmadjon Xashimov',
@@ -16,7 +16,15 @@ class _FilterPageState extends State<FilterPage> {
     'Nodirbek Abdubannobov',
     'Murodil Tursunaliyev',
     'Firdavs O‘rinov',
-    'Мадина Сабирова',
+    'Madina Sobirova',
+    'Sardor Qodirov',
+    'Isxoqjon Ahmedov',
+    'Ahmadjon Xashimov',
+    'Otabek Raymjonov',
+    'Nodirbek Abdubannobov',
+    'Murodil Tursunaliyev',
+    'Firdavs O‘rinov',
+    'Madina Sobirova',
   ];
   final Set<int> selectedTeachers = {};
 
@@ -39,14 +47,16 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     final checkboxTheme = CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.r)),
-      side: BorderSide(color: kBlue, width: 1.4.w),
-      checkColor:  WidgetStatePropertyAll(Colors.white),
+      side: BorderSide(color: Color.fromRGBO(82, 125, 236, 1), width: 1.w),
+      checkColor: WidgetStatePropertyAll(Colors.white),
       fillColor: WidgetStateProperty.resolveWith<Color?>(
         (states) =>
-            states.contains(WidgetState.selected) ? kBlue : Colors.transparent,
+            states.contains(WidgetState.selected)
+                ? Color.fromRGBO(82, 125, 236, 1)
+                : Colors.transparent,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      visualDensity:  VisualDensity(horizontal: -4, vertical: -4),
+      visualDensity: VisualDensity(horizontal: -4, vertical: -4),
     );
     return Theme(
       data: Theme.of(context).copyWith(checkboxTheme: checkboxTheme),
@@ -89,15 +99,15 @@ class _FilterPageState extends State<FilterPage> {
             ),
           ),
         ),
-      
+
         body: ListView(
-          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 60.h),
+          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 70.h),
           children: [
             // O‘qituvchilar
             _SectionCard(
               title: "O‘qituvchilar",
               child: SizedBox(
-                height: 260.h,
+                height: 380.h,
                 child: Scrollbar(
                   controller: _scrollCtrl, // <-- MUHIM
                   thumbVisibility: true,
@@ -106,7 +116,7 @@ class _FilterPageState extends State<FilterPage> {
                   child: ListView.separated(
                     itemCount: teachers.length,
                     controller: _scrollCtrl, // <-- AYNAN SHU controller
-                    separatorBuilder: (_, __) => SizedBox(height: 6.h),
+                    separatorBuilder: (_, __) => SizedBox(height: 24.h),
                     itemBuilder: (context, i) {
                       final isSel = selectedTeachers.contains(i);
                       return _CheckRow(
@@ -127,59 +137,35 @@ class _FilterPageState extends State<FilterPage> {
                 ),
               ),
             ),
-      
+
             SizedBox(height: 12.h),
-      
+
             // Narxi
             _SectionCard(
               title: "Narxi",
               child: Column(
+                
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(8.r),
-                    onTap: () => setState(() => priceType = 'Pullik'),
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: priceType == 'Pullik',
-                          onChanged: (_) => setState(() => priceType = 'Pullik'),
-                        ),
-                        SizedBox(width: 6.w),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text(
-                                'Pullik',
-                                style: TextStyle(
-                                  fontSize: 14.5.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(width: 6.w),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                size: 18.sp,
-                                color: Colors.black54,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  SizedBox(height: 4.h),
+                  _CheckRow(
+                    label: 'Pullik',
+                    value: priceType == 'pullik',
+                    onChanged: (_) => setState(() => priceType = 'pullik'),
                   ),
-                  SizedBox(height: 6.h),
+                  SizedBox(height: 24.h),
                   _CheckRow(
                     label: 'Bepul',
                     value: priceType == 'Bepul',
                     onChanged: (_) => setState(() => priceType = 'Bepul'),
                   ),
+                  SizedBox(height: 10.h),
                 ],
               ),
             ),
-      
+
             SizedBox(height: 12.h),
-      
+
             // Daraja
             _SectionCard(
               title: "Daraja",
@@ -187,7 +173,7 @@ class _FilterPageState extends State<FilterPage> {
                 children:
                     levels.keys.map((k) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 4.h),
+                        padding: EdgeInsets.only(top: 4.h, bottom: 20.h),
                         child: _CheckRow(
                           label: k,
                           value: levels[k]!,
@@ -232,7 +218,7 @@ class _FilterPageState extends State<FilterPage> {
 class _SectionCard extends StatelessWidget {
   final String title;
   final Widget child;
-   _SectionCard({required this.title, required this.child});
+  _SectionCard({required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -242,16 +228,19 @@ class _SectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Color.fromRGBO(82, 125, 236, 1), width: 1.w),
       ),
-      padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 12.h),
+      padding: EdgeInsets.fromLTRB(12.w, 24.h, 12.w, 12.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 15.5.sp,
-              fontWeight: FontWeight.w800,
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.only(left: 12.w),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
             ),
           ),
           SizedBox(height: 10.h),
@@ -267,7 +256,7 @@ class _CheckRow extends StatelessWidget {
   final String label;
   final bool value;
   final ValueChanged<bool?> onChanged;
-   _CheckRow({
+  _CheckRow({
     required this.label,
     required this.value,
     required this.onChanged,
@@ -277,19 +266,17 @@ class _CheckRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Checkbox(
-          value: value,
-          onChanged: onChanged,
-          checkColor: Color.fromRGBO(236, 226, 82, 1),
-        ),
-        SizedBox(width: 6.w),
+        SizedBox(width: 10.w),
+        Checkbox(value: value, onChanged: onChanged, checkColor: Colors.white),
+        SizedBox(width: 10.w),
         Expanded(
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 14.5.sp,
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
+              fontSize: 16.sp,
+              color: Color.fromRGBO(95, 100, 110, 1),
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Regular',
             ),
           ),
         ),

@@ -40,33 +40,37 @@ class _BottomBar extends StatelessWidget {
           ),
         ],
       ),
-      child: BottomNavigationBar(
-        elevation: 8,
-        backgroundColor: Colors.white,
-        currentIndex: index,
-        onTap: onChanged,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color.fromRGBO(53, 114, 237, 1),
-        unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.5),
-        showUnselectedLabels: true,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Asosiy',
+      child: ClipRRect(
+         borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18.r),
+            topRight: Radius.circular(18.r),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: 'Kurslar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.leaderboard_outlined),
-            label: 'Reyting',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profil',
-          ),
-        ],
+        child: BottomNavigationBar(
+          elevation: 8,
+          backgroundColor: Colors.white,
+          currentIndex: index,
+          onTap: onChanged,
+          type: BottomNavigationBarType.fixed,
+          showUnselectedLabels: true,
+          items: [
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/icons/home.png", color: index == 0 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              label: 'Asosiy',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/icons/kurs.png", color: index == 1 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              label: 'Kurslar',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/icons/reyting.png", color: index == 2 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              label: 'Reyting',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset("assets/icons/profile.png", color: index == 3 ? Color.fromRGBO(0, 84, 252, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              label: 'Profil',
+            ),
+          ],
+        ),
       ),
     );
   }

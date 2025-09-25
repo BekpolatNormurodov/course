@@ -75,7 +75,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ),
                       ),
                       SizedBox(height: 12.h),
-
+                    
                       // Ism
                       Text(
                         "Sardor Qodirov",
@@ -87,7 +87,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ),
                       ),
                       SizedBox(height: 12.h),
-
+                    
                       // Lavozim
                       Text(
                         "Full stack dizayner",
@@ -99,7 +99,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ),
                       ),
                       SizedBox(height: 24.h),
-
+                    
                       // Statistika
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +148,7 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                         ],
                       ),
                       SizedBox(height: 24.h),
-
+                    
                       // Bio matn
                       Text(
                         "Ismim Sardor Qodirov (KADIROV). Grafik va veb dizaynerman.\n\n"
