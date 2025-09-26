@@ -1,4 +1,5 @@
 import 'package:course/library.dart';
+import 'package:flutter/cupertino.dart';
 
 class NavigatorBar extends StatefulWidget {
   NavigatorBar({super.key});
@@ -12,7 +13,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
 
   @override
   Widget build(BuildContext context) {
-    List page = [AsosiyPage(), KurslarPage(), LoginPage()];
+    List page = [AsosiyPage(), KurslarPage(), LoginPage(), ProfilePage()];
     return Scaffold(
       body: page[_currentIndex],
       bottomNavigationBar: _BottomBar(
@@ -52,21 +53,23 @@ class _BottomBar extends StatelessWidget {
           onTap: onChanged,
           type: BottomNavigationBarType.fixed,
           showUnselectedLabels: true,
+          selectedItemColor: Color.fromRGBO(0, 85, 255, 1),
+          unselectedItemColor: Color.fromRGBO(0, 0, 0, 0.5),
           items: [
             BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/home.png", color: index == 0 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              icon: Icon(Icons.home_outlined),
               label: 'Asosiy',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/kurs.png", color: index == 1 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              icon: Icon(Icons.school_outlined),
               label: 'Kurslar',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/reyting.png", color: index == 2 ? Color.fromRGBO(0, 85, 255, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              icon: Icon(Icons.workspace_premium_outlined),
               label: 'Reyting',
             ),
             BottomNavigationBarItem(
-              icon: Image.asset("assets/icons/profile.png", color: index == 3 ? Color.fromRGBO(0, 84, 252, 1) : Color.fromRGBO(0, 0, 0, 0.5)),
+              icon: Icon(CupertinoIcons.person,),
               label: 'Profil',
             ),
           ],

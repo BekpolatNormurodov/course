@@ -224,7 +224,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   width: double.infinity,
                   height: 54.h,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(AsosiyPage()),
+                    onPressed: () => Get.to(PersonalDataPage()),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: blue,
                       foregroundColor: Colors.white,

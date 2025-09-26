@@ -14,14 +14,16 @@ export 'package:flutter_rating_bar/flutter_rating_bar.dart';
 // Auth
 export 'package:course/Auth/login_page.dart';
 export 'package:course/Auth/smscode_page.dart';
+export 'package:course/Auth/personal_data_page.dart';
 
 // Screen
 export 'package:course/Screen/navigation_bar.dart';
 export 'package:course/Screen/Asosiy/asosiy_page.dart';
-export 'package:course/Screen/kurslar/kurslar_page.dart';
-export 'package:course/Screen/kurslar/filter_page.dart';
+export 'package:course/Screen/Kurslar/kurslar_page.dart';
+export 'package:course/Screen/Kurslar/filter_page.dart';
 export 'package:course/Screen/Asosiy/about_course_page.dart';
 export 'package:course/Screen/Asosiy/about_muallif_page.dart';
+export 'package:course/Screen/Profile/profile_page.dart';
 
 
 // Class
