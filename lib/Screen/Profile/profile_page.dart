@@ -4,7 +4,6 @@ class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
 
   static const _blue = Color.fromRGBO(53, 114, 237, 1);
-  static const _textSecondary = Color(0xFF667085);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
