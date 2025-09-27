@@ -24,6 +24,8 @@ export 'package:course/Screen/Kurslar/filter_page.dart';
 export 'package:course/Screen/Asosiy/about_course_page.dart';
 export 'package:course/Screen/Asosiy/about_muallif_page.dart';
 export 'package:course/Screen/Profile/profile_page.dart';
+export 'package:course/Screen/Profile/about_my_course_page.dart';
+
 
 
 // Class

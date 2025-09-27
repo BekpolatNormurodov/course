@@ -1,4 +1,3 @@
-import 'package:course/Screen/Profile/about_my_course_page.dart';
 import 'package:course/library.dart';
 
 class MyCoursesPage extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:course/Screen/Profile/jadval_page.dart';
 import 'package:course/library.dart';
 
 class AboutMyCoursePage extends StatefulWidget {
@@ -10,44 +11,8 @@ class AboutMyCoursePage extends StatefulWidget {
 class _AboutMyCoursePageState extends State<AboutMyCoursePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Kurs haqida',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: Color(0xFF2563EB),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFF2563EB),
-          primary: Color(0xFF2563EB),
-        ),
-        textTheme: TextTheme(
-          headlineSmall: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w700,
-          ),
-          titleLarge: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800),
-          titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
-          titleSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-          bodyMedium: TextStyle(fontSize: 14.sp, color: Color(0xFF333333)),
-          bodySmall: TextStyle(fontSize: 12.sp, color: Color(0xFF666666)),
-          labelLarge: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      home: CourseDetailsPage(),
-    );
-  }
-}
-
-class CourseDetailsPage extends StatelessWidget {
-  CourseDetailsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
@@ -195,7 +160,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                     height: 2.h,
                   ),
                   SizedBox(
-                    height: 312.h,
+                    height: 380.h,
                     child: GridView.builder(
                       padding: EdgeInsets.symmetric(
                         horizontal: 18.w,
@@ -206,15 +171,10 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                         crossAxisCount: 2, // 2 ustunli grid
                         mainAxisSpacing: 38.h,
                         crossAxisSpacing: 12.w,
-                        childAspectRatio:
-                            1.2, // kartaning balandlik/eni nisbati
                       ),
                       itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            color: Colors.grey[200],
-                          ),
+                        return GestureDetector(
+                          onTap: ()=> Get.to(JadvalPage()),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -222,24 +182,17 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                 child: Stack(
                                   alignment: Alignment.center,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(12.r),
-                                        topRight: Radius.circular(12.r),
-                                      ),
-                                      child: Image.asset(
-                                        "assets/images/video.png",
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                                    Image.asset(
+                                      "assets/images/video.png",
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
                                     ),
                                     Container(
+                                      width: 48.w,
+                                      height: 48.w,
                                       decoration: BoxDecoration(
-                                        color: Colors.blue,
+                                        color: Color.fromRGBO(94, 82, 236, 1),
                                         shape: BoxShape.circle,
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 12.w,
                                       ),
                                       child: Icon(
                                         Icons.play_arrow,
@@ -251,9 +204,9 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 8.w,
-                                  vertical: 6.h,
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                  top: 12.h,
                                 ),
                                 child: Text(
                                   "1. HTML. Boshlangich tushunchalar. Teg va...",
@@ -261,7 +214,9 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
+                                    height: 1.5,
+                                    fontFamily: 'Regular',
+                                    color: Color.fromRGBO(57, 60, 67, 1),
                                   ),
                                 ),
                               ),
