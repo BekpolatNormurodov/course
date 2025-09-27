@@ -90,7 +90,7 @@ class TabChipItem {
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 0),
-                  color: Color.fromRGBO(0, 0, 0, 0.18),
+                  color: Color.fromRGBO(0, 0, 0, 0.12),
                   blurRadius: 6.r,
                 ),
               ],

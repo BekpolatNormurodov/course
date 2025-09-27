@@ -1,3 +1,4 @@
+import 'package:course/Screen/Profile/my_courses_page.dart';
 import 'package:course/library.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -106,16 +107,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       _MenuItem(
                         leadingIcon: "edit",
                         title: "Ma’lumotlarni tahrirlash",
+                        page: MyCoursesPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
                         leadingIcon: "kurs",
                         title: "Mening kurslarim",
+                         page: MyCoursesPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
                         leadingIcon: "history",
                         title: "Tranzaksiyalar tarixi",
+                         page: MyCoursesPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
@@ -140,16 +144,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
+                       page: MyCoursesPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
                         leadingIcon: "share",
                         title: "Biz bilan aloqa",
+                         page: MyCoursesPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
                         leadingIcon: "exit",
                         title: "Akkountdan chiqish",
+                         page: MyCoursesPage(),
                       ),
                     ],
                   ),
@@ -223,31 +230,35 @@ class _MenuItem extends StatelessWidget {
   final String leadingIcon;
   final String title;
   final Widget? trailing;
+  var page;
 
-  _MenuItem({required this.leadingIcon, required this.title, this.trailing});
+  _MenuItem({required this.leadingIcon, required this.title,required this.page, this.trailing});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
-      alignment: Alignment.center,
-      child: Row(
-        children: [
-          Image.asset("assets/icons/$leadingIcon.png", width: 20.w),
-          SizedBox(width: 16.w),
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: Color.fromRGBO(0, 0, 0, 1),
-                fontFamily: 'Regular'
+    return GestureDetector(
+      onTap: () => Get.to(page),
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
+        alignment: Alignment.center,
+        child: Row(
+          children: [
+            Image.asset("assets/icons/$leadingIcon.png", width: 20.w),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: Color.fromRGBO(0, 0, 0, 1),
+                  fontFamily: 'Regular'
+                ),
               ),
             ),
-          ),
-          trailing ??
-              Icon(Icons.chevron_right, size: 20.sp, color: Color.fromRGBO(159, 166, 178, 1)),
-        ],
+            trailing ??
+                Icon(Icons.chevron_right, size: 20.sp, color: Color.fromRGBO(159, 166, 178, 1)),
+          ],
+        ),
       ),
     );
   }
