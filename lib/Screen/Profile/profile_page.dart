@@ -1,4 +1,3 @@
-import 'package:course/Screen/Profile/my_courses_page.dart';
 import 'package:course/library.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -119,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       _MenuItem(
                         leadingIcon: "history",
                         title: "Tranzaksiyalar tarixi",
-                         page: MyCoursesPage(),
+                         page: TransactionHistoryApp(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
@@ -230,7 +229,7 @@ class _MenuItem extends StatelessWidget {
   final String leadingIcon;
   final String title;
   final Widget? trailing;
-  var page;
+  final page;
 
   _MenuItem({required this.leadingIcon, required this.title,required this.page, this.trailing});
 

@@ -54,7 +54,7 @@ class JadvalPage extends StatelessWidget {
             child: Icon(
               Icons.format_list_bulleted,
               size: 20.sp,
-              color: Color.fromRGBO(53, 114, 237, 1), // ko‘k rang
+              color: Color.fromRGBO(53, 114, 237, 1),
             ),
           ),
         ],
@@ -141,7 +141,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(82, 125, 236, 1), // ko‘k rang
+                    color: Color.fromRGBO(82, 125, 236, 1),
                   ),
                 ),
                 SizedBox(height: 4.h),

@@ -10,7 +10,6 @@ export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 export 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-
 // Auth
 export 'package:course/Auth/login_page.dart';
 export 'package:course/Auth/smscode_page.dart';
@@ -25,7 +24,8 @@ export 'package:course/Screen/Asosiy/about_course_page.dart';
 export 'package:course/Screen/Asosiy/about_muallif_page.dart';
 export 'package:course/Screen/Profile/profile_page.dart';
 export 'package:course/Screen/Profile/about_my_course_page.dart';
-
+export 'package:course/Screen/Profile/my_courses_page.dart';
+export 'package:course/Screen/Profile/tranzaksiyalar_tarixi_page.dart';
 
 
 // Class
