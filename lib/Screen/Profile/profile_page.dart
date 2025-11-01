@@ -1,4 +1,5 @@
 import 'package:course/library.dart';
+import 'package:course/Screen/Profile/change_language.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -118,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       _MenuItem(
                         leadingIcon: "history",
                         title: "Tranzaksiyalar tarixi",
-                         page: TransactionHistoryApp(),
+                         page: TransactionHistoryPage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(
@@ -143,7 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-                       page: MyCoursesPage(),
+                       page: ChangeLanguagePage(),
                       ),
                       _ThinDivider(),
                       _MenuItem(

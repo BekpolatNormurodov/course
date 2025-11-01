@@ -25,7 +25,7 @@ export 'package:course/Screen/Asosiy/about_muallif_page.dart';
 export 'package:course/Screen/Profile/profile_page.dart';
 export 'package:course/Screen/Profile/about_my_course_page.dart';
 export 'package:course/Screen/Profile/my_courses_page.dart';
-export 'package:course/Screen/Profile/tranzaksiyalar_tarixi_page.dart';
+export 'package:course/Screen/Profile/transaction_history_page.dart';
 
 
 // Class

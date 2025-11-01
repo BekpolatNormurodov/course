@@ -1,64 +1,5 @@
 import 'package:course/library.dart';
 
-/// =======================
-/// Model
-/// =======================
-class Transaction {
-  final String title;
-  final DateTime date;
-  final int amount; // manfiy = chiqim, musbat = kirim
-  final String provider; // masalan: Payme, Click
-
-  Transaction({
-    required this.title,
-    required this.date,
-    required this.amount,
-    required this.provider,
-  });
-}
-
-/// =======================
-/// Filter enums & result
-/// =======================
-enum TolovTuri { barchasi, kirim, chiqim }
-
-class FilterResult {
-  final TolovTuri? tolovTuri;
-  final DateTime? sana;
-
-  const FilterResult({this.tolovTuri, this.sana});
-
-  @override
-  String toString() => 'FilterResult(tolovTuri: $tolovTuri, sana: $sana)';
-}
-
-/// Sana formatlovchi (intl’siz)
-String _fmtDate(DateTime d) {
-  String two(int x) => x.toString().padLeft(2, '0');
-  return "${two(d.day)}.${two(d.month)}.${d.year}";
-}
-
-class TransactionHistoryApp extends StatelessWidget {
-  TransactionHistoryApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, __) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(useMaterial3: true),
-        home: TransactionHistoryPage(),
-      ),
-    );
-  }
-}
-
-/// =======================
-/// PAGE
-/// =======================
 class TransactionHistoryPage extends StatelessWidget {
   TransactionHistoryPage({super.key});
 
@@ -80,7 +21,7 @@ class TransactionHistoryPage extends StatelessWidget {
               width: 34.w,
               height: 34.w,
               decoration: BoxDecoration(
-                color: const Color.fromRGBO(238, 240, 245, 1),
+                color: Color.fromRGBO(238, 240, 245, 1),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Icon(
@@ -105,7 +46,6 @@ class TransactionHistoryPage extends StatelessWidget {
             onTap: () async {
               final res = await showFilterBottomSheet(
                 context,
-                initialType: TolovTuri.barchasi,
                 initialDate: DateTime.now(),
               );
               if (res != null) {
@@ -118,7 +58,6 @@ class TransactionHistoryPage extends StatelessWidget {
                     ),
                   ),
                 );
-                // TODO: shu yerda ro‘yxatni filtrlang (agar kerak bo‘lsa)
               }
             },
             child: Image.asset(
@@ -140,7 +79,7 @@ class TransactionHistoryPage extends StatelessWidget {
 /// LIST
 /// =======================
 class _ListTile extends StatelessWidget {
-  const _ListTile();
+  _ListTile();
 
   @override
   Widget build(BuildContext context) {
@@ -155,12 +94,12 @@ class _ListTile extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 6.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
-              color: const Color.fromRGBO(253, 254, 255, 1),
+              color: Color.fromRGBO(253, 254, 255, 1),
               boxShadow: [
                 BoxShadow(
-                  offset: const Offset(0, 0),
+                  offset: Offset(0, 0),
                   blurRadius: 3.r,
-                  color: const Color.fromRGBO(0, 0, 0, 0.12),
+                  color: Color.fromRGBO(0, 0, 0, 0.12),
                 ),
               ],
             ),
@@ -172,7 +111,7 @@ class _ListTile extends StatelessWidget {
               title: Text(
                 "Java dasturlash tili asoslari",
                 style: GoogleFonts.rubik(
-                  color: const Color.fromRGBO(13, 20, 39, 1),
+                  color: Color.fromRGBO(13, 20, 39, 1),
                   fontWeight: FontWeight.w500,
                   fontSize: 14.sp,
                   letterSpacing: 0,
@@ -181,7 +120,7 @@ class _ListTile extends StatelessWidget {
               subtitle: Text(
                 "28 - Oktyabr, 2024",
                 style: GoogleFonts.rubik(
-                  color: const Color.fromRGBO(13, 20, 39, 0.6),
+                  color: Color.fromRGBO(13, 20, 39, 0.6),
                   fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),
@@ -189,7 +128,7 @@ class _ListTile extends StatelessWidget {
               trailing: Text(
                 "-100 000 UZS",
                 style: GoogleFonts.rubik(
-                  color: const Color.fromRGBO(13, 20, 39, 1),
+                  color: Color.fromRGBO(13, 20, 39, 1),
                   fontWeight: FontWeight.w500,
                   fontSize: 12.sp,
                   letterSpacing: 0,
@@ -211,28 +150,25 @@ class _ListTile extends StatelessWidget {
 ///   initialType: TolovTuri.barchasi,
 ///   initialDate: DateTime.now(),
 /// );
-Future<FilterResult?> showFilterBottomSheet(
+Future showFilterBottomSheet(
   BuildContext context, {
-  TolovTuri? initialType,
   DateTime? initialDate,
 }) {
-  return showModalBottomSheet<FilterResult>(
+  return showModalBottomSheet(
     context: context,
     isScrollControlled: false,
     backgroundColor: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
     ),
-    builder: (ctx) => _FilterSheet(
-      initialType: initialType,
-      initialDate: initialDate,
-    ),
+    builder:
+        (ctx) =>
+            _FilterSheet(initialDate: initialDate),
   );
 }
 
 class _FilterSheet extends StatefulWidget {
-  const _FilterSheet({this.initialType, this.initialDate});
-  final TolovTuri? initialType;
+  _FilterSheet({this.initialDate});
   final DateTime? initialDate;
 
   @override
@@ -241,16 +177,19 @@ class _FilterSheet extends StatefulWidget {
 
 class _FilterSheetState extends State<_FilterSheet> {
   final _formKey = GlobalKey<FormState>();
-  TolovTuri? _type;
   DateTime? _date;
   late final TextEditingController _dateCtrl;
+
+  String? selectedProvider;
+  final List<String> _providers = ['Payme', 'Click', 'Anor'];
 
   @override
   void initState() {
     super.initState();
-    _type = widget.initialType;
     _date = widget.initialDate;
-    _dateCtrl = TextEditingController(text: _date != null ? _fmtDate(_date!) : '');
+    _dateCtrl = TextEditingController(
+      text: _date != null ? _fmtDate(_date!) : '',
+    );
   }
 
   @override
@@ -261,12 +200,12 @@ class _FilterSheetState extends State<_FilterSheet> {
 
   @override
   Widget build(BuildContext context) {
-    InputDecoration _fieldDec(String hint, {Widget? suffixIcon}) {
+    InputDecoration fieldDec(String hint, {Widget? suffixIcon}) {
       return InputDecoration(
         hintText: hint,
-        hintStyle: GoogleFonts.rubik(fontSize: 13.sp, color: const Color(0x990D1427)),
+        hintStyle: GoogleFonts.rubik(fontSize: 14.sp, color: Color(0x990D1427)),
         filled: true,
-        fillColor: const Color(0xFFF3F5F7),
+        fillColor: Color(0xFFF3F5F7),
         contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
         suffixIcon: suffixIcon,
         border: OutlineInputBorder(
@@ -276,7 +215,7 @@ class _FilterSheetState extends State<_FilterSheet> {
       );
     }
 
-    Future<void> _pickDate() async {
+    Future<void> pickDate() async {
       final now = DateTime.now();
       final picked = await showDatePicker(
         context: context,
@@ -284,12 +223,13 @@ class _FilterSheetState extends State<_FilterSheet> {
         firstDate: DateTime(2000),
         lastDate: DateTime(now.year + 5),
         helpText: 'Sana tanlang',
-        builder: (c, child) => Theme(
-          data: Theme.of(c).copyWith(
-            colorScheme: const ColorScheme.light(primary: Color(0xFF2E6CF6)),
-          ),
-          child: child!,
-        ),
+        builder:
+            (c, child) => Theme(
+              data: Theme.of(c).copyWith(
+                colorScheme: ColorScheme.light(primary: Color(0xFF2E6CF6)),
+              ),
+              child: child!,
+            ),
       );
       if (picked != null) {
         setState(() {
@@ -300,7 +240,7 @@ class _FilterSheetState extends State<_FilterSheet> {
     }
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 60.h),
+      padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 60.h),
       child: Form(
         key: _formKey,
         child: Column(
@@ -313,15 +253,19 @@ class _FilterSheetState extends State<_FilterSheet> {
                   child: Text(
                     "Filterlash",
                     style: GoogleFonts.rubik(
-                      fontSize: 16.5.sp,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D1427),
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0,
+                      color: Colors.black,
                     ),
                   ),
                 ),
                 InkWell(
                   onTap: () => Navigator.pop(context),
-                  child: const Icon(Icons.close, color: Colors.red),
+                  child: Icon(
+                    Icons.close,
+                    color: Color.fromRGBO(255, 10, 10, 1),
+                  ),
                 ),
               ],
             ),
@@ -331,69 +275,95 @@ class _FilterSheetState extends State<_FilterSheet> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "To‘lov turi",
-                style: GoogleFonts.rubik(fontSize: 13.sp, fontWeight: FontWeight.w500),
+                "To’lov turi",
+                style: GoogleFonts.rubik(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0,
+                  color: Color.fromRGBO(13, 20, 39, 1),
+                ),
               ),
             ),
-            SizedBox(height: 6.h),
-            DropdownButtonFormField<TolovTuri?>(
-              value: _type,
+            SizedBox(height: 10.h),
+            DropdownButtonFormField<String?>(
+              dropdownColor: Colors.grey.shade200,
+              value: null,
               isExpanded: true,
-              items: const [
-                DropdownMenuItem<TolovTuri?>(value: null, child: Text("Tanlang")),
-                DropdownMenuItem<TolovTuri?>(value: TolovTuri.barchasi, child: Text("Barchasi")),
-                DropdownMenuItem<TolovTuri?>(value: TolovTuri.kirim, child: Text("Kirim")),
-                DropdownMenuItem<TolovTuri?>(value: TolovTuri.chiqim, child: Text("Chiqim")),
+              decoration: fieldDec("To'lov provayderi"),
+              icon: Icon(Icons.keyboard_arrow_down_rounded),
+              hint: Text(
+                "Tanlang",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontFamily: 'Regular',
+                  letterSpacing: 0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              items: <DropdownMenuItem<String?>>[
+                ..._providers.map(
+                  (p) => DropdownMenuItem<String?>(value: p, child: Text(p)),
+                ),
               ],
-              onChanged: (v) => setState(() => _type = v),
-              decoration: _fieldDec("Tanlang"),
-              icon: const Icon(Icons.keyboard_arrow_down_rounded),
+              onChanged: (v) {
+                setState(() => selectedProvider = v);
+                // kerak bo‘lsa: print('Tanlangan: $v');
+              },
             ),
-            SizedBox(height: 14.h),
+            SizedBox(height: 24.h),
 
             // Sana
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Sana",
-                style: GoogleFonts.rubik(fontSize: 13.sp, fontWeight: FontWeight.w500),
+                style: GoogleFonts.rubik(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0,
+                  color: Color.fromRGBO(13, 20, 39, 1),
+                ),
               ),
             ),
             SizedBox(height: 6.h),
             TextFormField(
               controller: _dateCtrl,
               readOnly: true,
-              onTap: _pickDate,
-              decoration: _fieldDec(
+              onTap: pickDate,
+              decoration: fieldDec(
                 "dd.MM.yyyy",
-                suffixIcon: const Icon(Icons.calendar_today_outlined),
+                suffixIcon: Icon(
+                  Icons.calendar_month_outlined,
+                  color: Color.fromRGBO(95, 99, 104, 1),
+                ),
               ),
             ),
-            SizedBox(height: 18.h),
+            SizedBox(height: 24.h),
 
             // Saqlash
             SizedBox(
               width: double.infinity,
+              height: 48.h,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2E6CF6),
+                  backgroundColor: Color.fromRGBO(53, 114, 237, 1),
                   foregroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(50.r),
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pop(
-                    context,
-                    FilterResult(tolovTuri: _type, sana: _date),
-                  );
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "Saqlash",
                   style: GoogleFonts.rubik(
-                    fontSize: 14.5.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0,
+                    height: 1.4,
                   ),
                 ),
               ),
@@ -405,4 +375,10 @@ class _FilterSheetState extends State<_FilterSheet> {
       ),
     );
   }
+}
+
+/// Sana formatlovchi (intl’siz)
+String _fmtDate(DateTime d) {
+  String two(int x) => x.toString().padLeft(2, '0');
+  return "${two(d.day)}.${two(d.month)}.${d.year}";
 }
