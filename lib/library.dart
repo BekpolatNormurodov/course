@@ -20,7 +20,7 @@ export 'package:course/Screen/navigation_bar.dart';
 export 'package:course/Screen/Asosiy/asosiy_page.dart';
 export 'package:course/Screen/Kurslar/kurslar_page.dart';
 export 'package:course/Screen/Kurslar/filter_page.dart';
-export 'package:course/Screen/Asosiy/about_course_page.dart';
+export 'package:course/Screen/Kurslar/about_course_page.dart';
 export 'package:course/Screen/Asosiy/about_muallif_page.dart';
 export 'package:course/Screen/Profile/profile_page.dart';
 export 'package:course/Screen/Profile/about_my_course_page.dart';

@@ -40,35 +40,7 @@ class TransactionHistoryPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
-          // 🔽 Filter bottom sheet shu yerda ochiladi
-          GestureDetector(
-            onTap: () async {
-              final res = await showFilterBottomSheet(
-                context,
-                initialDate: DateTime.now(),
-              );
-              if (res != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      "Filtr qo‘llandi: "
-                      "${res.tolovTuri == null ? 'Tanlanmagan' : res.tolovTuri!.name} — "
-                      "${res.sana != null ? _fmtDate(res.sana!) : 'sana tanlanmagan'}",
-                    ),
-                  ),
-                );
-              }
-            },
-            child: Image.asset(
-              "assets/icons/filtr.png",
-              width: 22.w,
-              height: 22.w,
-            ),
-          ),
-          SizedBox(width: 14.w),
-        ],
-      ),
+       ),
       body: _ListTile(),
       backgroundColor: Colors.white,
     );
@@ -267,6 +239,7 @@ class _FilterSheetState extends State<_FilterSheet> {
                     color: Color.fromRGBO(255, 10, 10, 1),
                   ),
                 ),
+                SizedBox(width: 12.h),
               ],
             ),
             SizedBox(height: 18.h),

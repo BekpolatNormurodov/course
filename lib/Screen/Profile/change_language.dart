@@ -1,5 +1,31 @@
 import 'package:course/library.dart';
 
+// ---- Til modelleri
+class LanguageOption {
+  final String title;
+  final Locale locale;
+  final String assetPath;
+
+   LanguageOption({
+    required this.title,
+    required this.locale,
+    required this.assetPath,
+  });
+}
+
+final _languages = <LanguageOption>[
+  LanguageOption(
+    title: 'Русский',
+    locale:  Locale('ru'),
+    assetPath: 'assets/icons/ru.png',
+  ),
+  LanguageOption(
+    title: "O'zbekcha",
+    locale:  Locale('uz', 'UZ'),
+    assetPath: 'assets/icons/uz.png',
+  ),
+];
+
 class ChangeLanguagePage extends StatefulWidget {
   ChangeLanguagePage({super.key});
 
@@ -10,8 +36,10 @@ class ChangeLanguagePage extends StatefulWidget {
 class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
   @override
   void initState() {
-    // showFilterBottomSheet(context);
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showLanguageBottomSheet(context);
+    });
   }
 
   @override
@@ -32,7 +60,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
               width: 34.w,
               height: 34.w,
               decoration: BoxDecoration(
-                color: Color.fromRGBO(238, 240, 245, 1),
+                color:  Color.fromRGBO(238, 240, 245, 1),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Icon(
@@ -57,7 +85,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
   }
 }
 
-Future showFilterBottomSheet(BuildContext context) {
+Future showLanguageBottomSheet(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: false,
@@ -76,24 +104,16 @@ class _FilterSheet extends StatefulWidget {
 
 class _FilterSheetState extends State<_FilterSheet> {
   final _formKey = GlobalKey<FormState>();
+  late Locale _selected;
+
+  @override
+  void initState() {
+    super.initState();
+    _selected =  Locale('uz', 'UZ'); // yoki Localizations.localeOf(context) ni post-frame’da oling
+  }
 
   @override
   Widget build(BuildContext context) {
-    InputDecoration fieldDec(String hint, {Widget? suffixIcon}) {
-      return InputDecoration(
-        hintText: hint,
-        hintStyle: GoogleFonts.rubik(fontSize: 14.sp, color: Color(0x990D1427)),
-        filled: true,
-        fillColor: Color.fromRGBO(238, 240, 245, 1),
-        contentPadding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-        suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide.none,
-        ),
-      );
-    }
-
     return Padding(
       padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 60.h),
       child: Form(
@@ -106,7 +126,7 @@ class _FilterSheetState extends State<_FilterSheet> {
               children: [
                 Expanded(
                   child: Text(
-                    "Filterlash",
+                    "Til",
                     style: GoogleFonts.rubik(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -117,14 +137,63 @@ class _FilterSheetState extends State<_FilterSheet> {
                 ),
                 InkWell(
                   onTap: () => Navigator.pop(context),
-                  child: Icon(
+                  child:  Icon(
                     Icons.close,
                     color: Color.fromRGBO(255, 10, 10, 1),
                   ),
                 ),
+                SizedBox(width: 12.h),
               ],
             ),
             SizedBox(height: 18.h),
+
+            // === TIL RO‘YXATI (Til sarlavhasi va Saqlash orasida) ===
+            ListView.separated(
+              shrinkWrap: true,
+              physics:  NeverScrollableScrollPhysics(),
+              itemCount: _languages.length,
+              separatorBuilder: (_, __) =>  Padding(
+                padding:  EdgeInsets.symmetric(vertical: 4.h),
+                child: Divider(height: 1, color: Color.fromRGBO(228, 233, 235, 1),),
+              ),
+              itemBuilder: (ctx, i) {
+                final item = _languages[i];
+                final isSelected =
+                    item.locale.languageCode == _selected.languageCode &&
+                    (item.locale.countryCode ?? '') ==
+                        (_selected.countryCode ?? '');
+
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: Image.asset(
+                      item.assetPath,
+                      width: 24.w,
+                      height: 24.w,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  title: Text(
+                    item.title,
+                    style: GoogleFonts.rubik(
+                      fontSize: 16.sp,
+                      fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
+                      color: Color.fromRGBO(5, 35, 56, 1),
+                      letterSpacing: 0,
+                    ),
+                  ),
+                  trailing: isSelected
+                      ?  Icon(Icons.check, color: Color.fromRGBO(53, 114, 237, 1))
+                      :  SizedBox.shrink(),
+                  onTap: () {
+                    setState(() => _selected = item.locale);
+                    // Agar darhol qo‘llash kerak bo‘lsa:
+                    // Get.updateLocale(item.locale);
+                  },
+                );
+              },
+            ),
 
             SizedBox(height: 24.h),
 
@@ -134,7 +203,7 @@ class _FilterSheetState extends State<_FilterSheet> {
               height: 48.h,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(53, 114, 237, 1),
+                  backgroundColor:  Color.fromRGBO(53, 114, 237, 1),
                   foregroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(vertical: 14.h),
                   shape: RoundedRectangleBorder(
@@ -142,6 +211,8 @@ class _FilterSheetState extends State<_FilterSheet> {
                   ),
                 ),
                 onPressed: () {
+                  // Tanlangan tilni shu yerda qo‘llang:
+                  // Get.updateLocale(_selected);
                   Navigator.pop(context);
                 },
                 child: Text(

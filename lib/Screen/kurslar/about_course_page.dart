@@ -1,3 +1,4 @@
+import 'package:course/Screen/Kurslar/sotib_olish_page.dart';
 import 'package:course/library.dart';
 
 class AboutCoursePage extends StatefulWidget {
@@ -306,7 +307,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                   height: 48.h,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(SotibOlishPage()),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kBlue,
                       foregroundColor: Colors.white,
