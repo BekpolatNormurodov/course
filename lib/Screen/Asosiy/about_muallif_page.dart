@@ -179,10 +179,10 @@ class _AboutMuallifPageState extends State<AboutMuallifPage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  child: KursBannerClass().kursGrid("1 200 000"),
-                  height: 600,
-                ),
+                // SizedBox(
+                //   child: KursBannerClass().kursGrid("1 200 000"),
+                //   height: 600,
+                // ),
               ],
             ),
           ),

@@ -3,7 +3,17 @@ import 'package:course/library.dart';
 void main() => runApp(
   ScreenUtilInit(
     designSize: Size(375, 812),
-    builder: (context, child) => MyApp(),
+    builder: (context, child) {
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => CoursesProvider(CoursesService()),
+            child: const MyApp(),
+          ),
+        ],
+        child: MyApp(),
+      );
+    },
   ),
 );
 

@@ -8,17 +8,41 @@ class KurslarPage extends StatefulWidget {
 
 class _KurslarPageState extends State<KurslarPage> {
   int selectedFilter = 0;
-  final buttons = ["Barchasi", "Dasturlash", "Matematika", "Fizika", "Kimyo"];
-  final narxlar = [
-    "1 200 000",
-    "500 000",
-    "2 000 000",
-    "3 500 000",
-    "1 000 000",
-  ];
+
+  CoursesProvider? provider;
+
+@override
+  void initState() {
+    super.initState();
+    // build tugagach chaqirish:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<CoursesProvider>().load();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final p = context.watch<CoursesProvider>();
+
+    if (p.isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (p.error != null) {
+      return Scaffold(
+        body: Center(child: Text('Xatolik: ${p.error}')),
+      );
+    }
+
+    if (p.data.isEmpty) {
+      return const Scaffold(
+        body: Center(child: Text('Kurslar topilmadi')),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -66,7 +90,7 @@ class _KurslarPageState extends State<KurslarPage> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemCount: buttons.length,
+              itemCount: p.data.length,
               separatorBuilder: (context, index) => SizedBox(width: 14.w),
               itemBuilder: (context, i) {
                 final isSelected = selectedFilter == i;
@@ -85,7 +109,7 @@ class _KurslarPageState extends State<KurslarPage> {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
-                      buttons[i],
+                      p.data[0].directionUz[i],
                       overflow: TextOverflow.ellipsis, // uzun matnlar uchun
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -100,7 +124,7 @@ class _KurslarPageState extends State<KurslarPage> {
             ),
           ),
           SizedBox(height: 6.h),
-          Expanded(child: KursBannerClass().kursGrid(narxlar[selectedFilter])),
+          Expanded(child: KursBannerClass().kursGrid(p.data)),
         ],
       ),
     );

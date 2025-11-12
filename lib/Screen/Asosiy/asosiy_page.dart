@@ -74,29 +74,29 @@ class _AsosiyPageState extends State<AsosiyPage> {
           ),
           SizedBox(height: 20.h),
 
-          // ---------- Top kurslar ----------
-          _SectionHeader(
-            title: 'Top kurslar',
-            subtitle: 'Eng ko‘p sotib olingan video darslar',
-          ),
-          KursBannerClass().kursList("1 200 000"),
-          // ---------- Yangi kurslar ----------
-          _SectionHeader(
-            title: 'Yangi kurslar',
-            subtitle: 'Eng ko‘p sotib olingan video darslar',
-            topPadding: 14.h,
-          ),
+          // // ---------- Top kurslar ----------
+          // _SectionHeader(
+          //   title: 'Top kurslar',
+          //   subtitle: 'Eng ko‘p sotib olingan video darslar',
+          // ),
+          // KursBannerClass().kursList("1 200 000"),
+          // // ---------- Yangi kurslar ----------
+          // _SectionHeader(
+          //   title: 'Yangi kurslar',
+          //   subtitle: 'Eng ko‘p sotib olingan video darslar',
+          //   topPadding: 14.h,
+          // ),
 
-          KursBannerClass().kursList("1 200 000"),
+          // KursBannerClass().kursList("1 200 000"),
 
-          // ---------- Dasturlash bo‘yicha ----------
-          _SectionHeader(
-            title: 'Dasturlash bo‘yicha',
-            trailing: 'Barchasi',
-            topPadding: 14.h,
-            withSubtitle: false,
-          ),
-          KursBannerClass().kursList("1 200 000"),
+          // // ---------- Dasturlash bo‘yicha ----------
+          // _SectionHeader(
+          //   title: 'Dasturlash bo‘yicha',
+          //   trailing: 'Barchasi',
+          //   topPadding: 14.h,
+          //   withSubtitle: false,
+          // ),
+          // KursBannerClass().kursList("1 200 000"),
           SizedBox(height: 16.h),
           Container(
             width: double.infinity,
@@ -253,13 +253,13 @@ class _BannerCard extends StatelessWidget {
   }
 }
 
-class _SectionHeader extends StatelessWidget {
+class SectionHeader extends StatelessWidget {
   final String title;
   final String? subtitle;
   final bool withSubtitle;
   final String? trailing;
   final double topPadding;
-  _SectionHeader({
+  SectionHeader({
     required this.title,
     this.subtitle,
     this.trailing,

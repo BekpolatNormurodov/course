@@ -1,35 +1,35 @@
 import 'package:course/library.dart';
 
 class KursBannerClass {
-  kursGrid(narx) {
+  kursGrid(List<CoursesModel> data) {
     return GridView.builder(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisExtent: 300.h,
       ),
-      itemCount: 20,
+      itemCount: data.length,
       itemBuilder: (context, index) {
-        return kursItem(narx);
+        return kursItem(data[index]);
       },
     );
   }
 
-  kursList(narx) {
+  kursList(List<CoursesModel> data) {
     return Container(
       margin: EdgeInsets.only(top: 8.h, left: 10.w),
       height: 300.h,
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: data.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return kursItem(narx);
+          return kursItem(data[index]);
         },
       ),
     );
   }
 
-  kursItem(narx) {
+  kursItem(CoursesModel data) {
     return GestureDetector(
       onTap: ()=>Get.to(AboutCoursePage()),
       child: Padding(
@@ -46,7 +46,7 @@ class KursBannerClass {
             children: [
               // Rasm (tepada)
               SizedBox(
-                child: Image.asset('assets/images/kurs.png', fit: BoxFit.cover),
+                child: Image.network(data.image, fit: BoxFit.cover),
               ),
       
               // Kontent
@@ -57,7 +57,7 @@ class KursBannerClass {
                   children: [
                     // Muallif
                     Text(
-                      "Sardor Qodirov",
+                     data.authorName,
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontFamily: 'Regular',
@@ -71,7 +71,7 @@ class KursBannerClass {
                       padding: EdgeInsets.only(right: 6.w),
                       height: 30.h,
                       child: Text(
-                        "Java dasturlash tili asoslari",
+                        data.coursesNameUz,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -85,16 +85,17 @@ class KursBannerClass {
                     SizedBox(height: 8.h),
       
                     // Yulduzlar + (5)
-                    Row(
+                    
+                  Row(
                       children: [
-                        Icon(Icons.star, size: 13.sp, color: Color(0xFFFFC107)),
-                        Icon(Icons.star, size: 13.sp, color: Color(0xFFFFC107)),
-                        Icon(Icons.star, size: 13.sp, color: Color(0xFFFFC107)),
-                        Icon(Icons.star, size: 13.sp, color: Color(0xFFFFC107)),
-                        Icon(Icons.star, size: 13.sp, color: Color(0xFFFFC107)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 1 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 2 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 3 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 4 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 5 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
                         SizedBox(width: 6.w),
                         Text(
-                          '(5)',
+                          data.averageRating == null ? "(0)" : "(${data.averageRating})",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color.fromRGBO(95, 100, 110, 1),
@@ -110,7 +111,7 @@ class KursBannerClass {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          narx,
+                          data.salePrice.toString(),
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
@@ -140,7 +141,7 @@ class KursBannerClass {
                           color: Color.fromRGBO(0, 0, 0, 0.3),
                         ),
                         SizedBox(width: 6.w),
-                        Text('38', style: TextStyle(fontSize: 14.sp)),
+                        Text(data.addedUser.toString(), style: TextStyle(fontSize: 14.sp)),
                         SizedBox(width: 22.w),
                         Icon(
                           Icons.person_outline,
@@ -148,7 +149,7 @@ class KursBannerClass {
                           color: Color.fromRGBO(0, 0, 0, 0.3),
                         ),
                         SizedBox(width: 6.w),
-                        Text('58', style: TextStyle(fontSize: 14.sp)),
+                        Text(data.soldCount.toString(), style: TextStyle(fontSize: 14.sp)),
                       ],
                     ),
                   ],

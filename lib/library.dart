@@ -1,5 +1,8 @@
 export 'package:flutter/material.dart';
+export 'package:flutter/services.dart';
+export 'dart:convert';
 export 'dart:async';
+
 
 // pubspec.yaml
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +12,8 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 export 'package:flutter_rating_bar/flutter_rating_bar.dart';
+export 'package:provider/provider.dart';
+
 
 // Auth
 export 'package:course/Auth/login_page.dart';
@@ -32,3 +37,8 @@ export 'package:course/Screen/Profile/transaction_history_page.dart';
 export 'package:course/class/kurs_banner_class.dart';
 export 'package:course/class/about_course_class.dart';
 
+
+// Repository
+export 'package:course/Repository/courses_model.dart';
+export 'package:course/Repository/courses_service.dart';
+export 'package:course/Repository/courses_provider.dart';
