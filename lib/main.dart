@@ -8,7 +8,9 @@ void main() => runApp(
         providers: [
           ChangeNotifierProvider(
             create: (_) => CoursesProvider(CoursesService()),
-            child: const MyApp(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => CourseIdProvider(apiService: CourseIdService()),
           ),
         ],
         child: MyApp(),

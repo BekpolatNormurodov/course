@@ -13,6 +13,18 @@ class AsosiyPage extends StatefulWidget {
 class _AsosiyPageState extends State<AsosiyPage> {
   final _banner = PageController(viewportFraction: .9);
 
+  CoursesProvider? provider;
+
+  @override
+  void initState() {
+    super.initState();
+    // build tugagach chaqirish:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<CoursesProvider>().load();
+    });
+  }
+
   @override
   void dispose() {
     _banner.dispose();
@@ -21,10 +33,24 @@ class _AsosiyPageState extends State<AsosiyPage> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.watch<CoursesProvider>();
+
+    if (p.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    if (p.error != null) {
+      return Scaffold(body: Center(child: Text('Xatolik: ${p.error}')));
+    }
+
+    if (p.data.isEmpty) {
+      return const Scaffold(body: Center(child: Text('Kurslar topilmadi')));
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-      surfaceTintColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
         toolbarHeight: 80.h,
         elevation: 0,
@@ -74,29 +100,29 @@ class _AsosiyPageState extends State<AsosiyPage> {
           ),
           SizedBox(height: 20.h),
 
-          // // ---------- Top kurslar ----------
-          // _SectionHeader(
-          //   title: 'Top kurslar',
-          //   subtitle: 'Eng ko‘p sotib olingan video darslar',
-          // ),
-          // KursBannerClass().kursList("1 200 000"),
-          // // ---------- Yangi kurslar ----------
-          // _SectionHeader(
-          //   title: 'Yangi kurslar',
-          //   subtitle: 'Eng ko‘p sotib olingan video darslar',
-          //   topPadding: 14.h,
-          // ),
+          // ---------- Top kurslar ----------
+          SectionHeader(
+            title: 'Top kurslar +-',
+            subtitle: 'Eng ko‘p sotib olingan video darslar',
+          ),
+          KursBannerClass().kursList(p.data),
+          // ---------- Yangi kurslar ----------
+          SectionHeader(
+            title: 'Yangi kurslar +-',
+            subtitle: 'Eng ko‘p sotib olingan video darslar',
+            topPadding: 14.h,
+          ),
 
-          // KursBannerClass().kursList("1 200 000"),
+          KursBannerClass().kursList(p.data),
 
-          // // ---------- Dasturlash bo‘yicha ----------
-          // _SectionHeader(
-          //   title: 'Dasturlash bo‘yicha',
-          //   trailing: 'Barchasi',
-          //   topPadding: 14.h,
-          //   withSubtitle: false,
-          // ),
-          // KursBannerClass().kursList("1 200 000"),
+          // ---------- Dasturlash bo‘yicha ----------
+          SectionHeader(
+            title: 'Dasturlash bo‘yicha +-',
+            trailing: 'Barchasi',
+            topPadding: 14.h,
+            withSubtitle: false,
+          ),
+          KursBannerClass().kursList(p.data),
           SizedBox(height: 16.h),
           Container(
             width: double.infinity,

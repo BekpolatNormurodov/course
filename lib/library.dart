@@ -39,6 +39,9 @@ export 'package:course/class/about_course_class.dart';
 
 
 // Repository
-export 'package:course/Repository/courses_model.dart';
-export 'package:course/Repository/courses_service.dart';
-export 'package:course/Repository/courses_provider.dart';
+export 'package:course/Repository/courses/courses_model.dart';
+export 'package:course/Repository/courses/courses_service.dart';
+export 'package:course/Repository/courses/courses_provider.dart';
+export 'package:course/Repository/course%20id/course_id_service.dart';
+export 'package:course/Repository/course%20id/course_id_provider.dart';
+

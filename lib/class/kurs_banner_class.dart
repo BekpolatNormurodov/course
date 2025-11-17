@@ -88,14 +88,14 @@ class KursBannerClass {
                     
                   Row(
                       children: [
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 1 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 2 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 3 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 4 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating != null && data.averageRating! >= 5 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 1 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 2 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 3 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 4 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
+                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 5 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
                         SizedBox(width: 6.w),
                         Text(
-                          data.averageRating == null ? "(0)" : "(${data.averageRating})",
+                          "(${data.averageRating})",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color.fromRGBO(95, 100, 110, 1),
