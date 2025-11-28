@@ -10,7 +10,7 @@ void main() => runApp(
             create: (_) => CoursesProvider(CoursesService()),
           ),
           ChangeNotifierProvider(
-            create: (_) => CourseIdProvider(apiService: CourseIdService()),
+            create: (_) => CourseIdProvider(CourseIdService()),
           ),
         ],
         child: MyApp(),

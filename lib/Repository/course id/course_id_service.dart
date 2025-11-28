@@ -13,7 +13,7 @@ class CourseIdService {
     final url = Uri.parse('$baseUrl/courses/$courseId');
 
     final response = await http.get(url);
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       return CourseIdModel.fromJson(json.decode(response.body));
     } else {

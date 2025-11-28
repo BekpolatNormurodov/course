@@ -1,32 +1,27 @@
 import 'package:course/library.dart';
-import 'package:course/Repository/course%20id/course_id_model.dart';
+import 'package:course/Repository/course id/course_id_model.dart';
 
 class CourseIdProvider extends ChangeNotifier {
-  final CourseIdService apiService;
+  final CourseIdService api;
+  CourseIdProvider(this.api);
 
-  CourseIdProvider({required this.apiService});
+  bool isLoading = false;
+  String? error;
+  CourseIdModel? data;   // ❗ endi List emas, bitta model
 
-  // ignore: non_constant_identifier_names
-  CourseIdModel? _CourseId;
-  bool _isLoading = false;
-  String? _error;
-
-  CourseIdModel? get CourseId => _CourseId;
-  bool get isLoading => _isLoading;
-  String? get error => _error;
-
-  Future<void> loadCourseId(int courseId) async {
-    _isLoading = true;
-    _error = null;
+  Future<void> load(int courseId) async {
+    isLoading = true;
+    error = null;
     notifyListeners();
 
     try {
-      final result = await apiService.getCourseId(courseId);
-      _CourseId = result;
+      // ❗ hech qanday `as List<CourseIdModel>` YO‘Q
+      data = await api.getCourseId(courseId);
     } catch (e) {
-      _error = e.toString();
+      error = e.toString();
+      data = null;
     } finally {
-      _isLoading = false;
+      isLoading = false;
       notifyListeners();
     }
   }

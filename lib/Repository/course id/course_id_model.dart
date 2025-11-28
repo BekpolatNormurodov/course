@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 CourseIdModel courseIdModelFromJson(String str) =>
-    CourseIdModel.fromJson(json.decode(str));
+    CourseIdModel.fromJson(json.decode(str) as Map<String, dynamic>);
 
 class CourseIdModel {
   final Course data;
@@ -19,8 +19,8 @@ class CourseIdModel {
   final int soldCount;
   final String status;
   final int teacherId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final Teacher teacher;
   final List<ModuleModel> modul;
   final List<CourseComment> comment;
@@ -61,7 +61,7 @@ class CourseIdModel {
 
   factory CourseIdModel.fromJson(Map<String, dynamic> json) {
     return CourseIdModel(
-      data: Course.fromJson(json['data']),
+      data: Course.fromJson(json['data'] ?? {}),
       directionUz: List<String>.from(json['direction_uz'] ?? []),
       directionEn: List<String>.from(json['direction_en'] ?? []),
       directionRu: List<String>.from(json['direction_ru'] ?? []),
@@ -75,9 +75,13 @@ class CourseIdModel {
       soldCount: json['sold_count'] ?? 0,
       status: json['status'] ?? '',
       teacherId: json['teacher_id'] ?? 0,
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-      teacher: Teacher.fromJson(json['teacher']),
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
+      teacher: Teacher.fromJson(json['teacher'] ?? {}),
       modul: (json['modul'] as List<dynamic>? ?? [])
           .map((e) => ModuleModel.fromJson(e))
           .toList(),
@@ -90,12 +94,17 @@ class CourseIdModel {
           ? DateTime.tryParse(json['purchase_date'])
           : null,
       isPurchased: json['is_purchased'] ?? false,
-      averageRating: (json['average_rating'] is int)
-          ? (json['average_rating'] as int).toDouble()
-          : (json['average_rating'] ?? 0.0).toDouble(),
+      averageRating: _toDouble(json['average_rating']),
       commentCount: json['comment_count'] ?? 0,
     );
   }
+}
+
+/// double ni xavfsiz parse qiladigan helper
+double _toDouble(dynamic value) {
+  if (value == null) return 0.0;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? 0.0;
 }
 
 class Course {
@@ -153,7 +162,7 @@ class Course {
 
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
-      id: json['id'],
+      id: json['id'] ?? 0,
       coursesNameUz: json['courses_name_uz'] ?? '',
       coursesNameEn: json['courses_name_en'] ?? '',
       coursesNameRu: json['courses_name_ru'] ?? '',
@@ -212,8 +221,8 @@ class Teacher {
   final String role;
   final String status;
   final String? image;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Teacher({
     required this.id,
@@ -232,18 +241,22 @@ class Teacher {
 
   factory Teacher.fromJson(Map<String, dynamic> json) {
     return Teacher(
-      id: json['id'],
+      id: json['id'] ?? 0,
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       email: json['email'] ?? '',
-      phoneNumber: json['phone_number'] ?? '',
+      phoneNumber: json['phone_number']?.toString() ?? '',
       gender: json['gender'] ?? '',
       birthDate: json['birth_date'] ?? '',
       role: json['role'] ?? '',
       status: json['status'] ?? '',
       image: json['image'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
     );
   }
 }
@@ -271,7 +284,7 @@ class ModuleModel {
 
   factory ModuleModel.fromJson(Map<String, dynamic> json) {
     return ModuleModel(
-      id: json['id'],
+      id: json['id'] ?? 0,
       titleUz: json['title_uz'] ?? '',
       titleEn: json['title_en'] ?? '',
       titleRu: json['title_ru'] ?? '',
@@ -294,7 +307,7 @@ class VideoModel {
   final double size;
   final bool isOpen;
   final String status;
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   VideoModel({
     required this.id,
@@ -310,15 +323,17 @@ class VideoModel {
 
   factory VideoModel.fromJson(Map<String, dynamic> json) {
     return VideoModel(
-      id: json['id'],
+      id: json['id'] ?? 0,
       titleUz: json['title_uz'] ?? '',
       titleEn: json['title_en'] ?? '',
       titleRu: json['title_ru'] ?? '',
       duration: json['duration'] ?? '',
-      size: (json['size'] ?? 0).toDouble(),
+      size: _toDouble(json['size']),
       isOpen: json['is_open'] ?? false,
       status: json['status'] ?? '',
-      createdAt: DateTime.parse(json['created_at']),
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
     );
   }
 }
@@ -331,9 +346,9 @@ class CourseComment {
   final int userId;
   final String commentCoursesName;
   final String commentAuthorName;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final List<dynamic> commentReply; // comment_reply strukturasini bilmaganimiz uchun dynamic
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final List<dynamic> commentReply;
 
   CourseComment({
     required this.id,
@@ -350,15 +365,19 @@ class CourseComment {
 
   factory CourseComment.fromJson(Map<String, dynamic> json) {
     return CourseComment(
-      id: json['id'],
+      id: json['id'] ?? 0,
       description: json['description'] ?? '',
       rating: json['rating'] ?? 0,
       courseId: json['course_id'] ?? 0,
       userId: json['user_id'] ?? 0,
       commentCoursesName: json['comment_courses_name'] ?? '',
       commentAuthorName: json['comment_author_name'] ?? '',
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.tryParse(json['updated_at'])
+          : null,
       commentReply: List<dynamic>.from(json['comment_reply'] ?? []),
     );
   }

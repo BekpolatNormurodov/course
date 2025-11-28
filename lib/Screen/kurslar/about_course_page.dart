@@ -103,12 +103,41 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
   bool themesActive = false;
   bool izohlarActive = false;
 
+  CourseIdProvider? provider;
+
+  @override
+  void initState() {
+    super.initState();
+    // build tugagach chaqirish:
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<CourseIdProvider>().load(1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final p = context.watch<CourseIdProvider>();
+
+    if (p.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    if (p.error != null) {
+      print('Xatolik: ${p.error}');
+      return Scaffold(body: Center(child: Text('Xatolik: ${p.error}')));
+    }
+
+    // ❗ data endi List emas, CourseIdModel?
+    if (p.data == null) {
+      return const Scaffold(body: Center(child: Text('Kurs topilmadi')));
+    }
+
+    final courseDetail = p.data!; // CourseIdModel
 
     return LayoutBuilder(
-      builder: (context, constraints) {
+      builder: (context, raints) {
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +146,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
               Padding(
                 padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 18.h),
                 child: Text(
-                  'Super Photoshop',
+                  courseDetail.data.coursesNameUz,
                   style: theme.textTheme.titleLarge!.copyWith(
                     letterSpacing: -0.2,
                   ),
@@ -131,7 +160,9 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                     children: [
                       CircleAvatar(
                         radius: 30.r,
-                        backgroundImage: AssetImage('assets/images/Ellipse.png'),
+                        backgroundImage: AssetImage(
+                          'assets/images/Ellipse.png',
+                        ),
                         // If you don't have assets, fallback color shows a circle
                       ),
                       Expanded(
@@ -148,7 +179,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                       style: theme.textTheme.bodySmall,
                                     ),
                                     Text(
-                                      'Baxtiyor Samandarov',
+                                      courseDetail.data.authorName,
                                       style: theme.textTheme.titleSmall,
                                     ),
                                   ],
@@ -159,7 +190,8 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                             Padding(
                               padding: EdgeInsets.only(left: 6.w, right: 10.w),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -193,7 +225,12 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                         '(5)',
                                         style: TextStyle(
                                           fontSize: 12.sp,
-                                          color: Color.fromRGBO(95, 100, 110, 1),
+                                          color: Color.fromRGBO(
+                                            95,
+                                            100,
+                                            110,
+                                            1,
+                                          ),
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
