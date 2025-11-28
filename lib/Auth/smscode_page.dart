@@ -234,7 +234,7 @@ class _SmsCodePageState extends State<SmsCodePage> {
                       elevation: 0,
                     ),
                     child: Text(
-                      'Davom etttish',
+                      'Davom ettirish',
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,

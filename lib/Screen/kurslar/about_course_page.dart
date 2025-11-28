@@ -125,13 +125,13 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
     }
 
     if (p.error != null) {
-      print('Xatolik: ${p.error}');
       return Scaffold(body: Center(child: Text('Xatolik: ${p.error}')));
     }
 
     // ❗ data endi List emas, CourseIdModel?
     if (p.data == null) {
       return const Scaffold(body: Center(child: Text('Kurs topilmadi')));
+      
     }
 
     final courseDetail = p.data!; // CourseIdModel
@@ -179,7 +179,7 @@ class _CourseScrollBodyState extends State<_CourseScrollBody> {
                                       style: theme.textTheme.bodySmall,
                                     ),
                                     Text(
-                                      courseDetail.data.authorName,
+                                      courseDetail.commentCount.toString(),
                                       style: theme.textTheme.titleSmall,
                                     ),
                                   ],
