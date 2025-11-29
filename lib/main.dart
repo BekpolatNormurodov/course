@@ -1,3 +1,5 @@
+import 'package:course/Repository/banner/banner_provider.dart';
+import 'package:course/Repository/mentor%20banner/mentorbanner_provider.dart';
 import 'package:course/library.dart';
 
 void main() => runApp(
@@ -12,6 +14,8 @@ void main() => runApp(
           ChangeNotifierProvider(
             create: (_) => CourseIdProvider(CourseIdService()),
           ),
+          ChangeNotifierProvider(create: (_) => BannerProvider()),
+          ChangeNotifierProvider(create: (_) => MentorBannerProvider()),
         ],
         child: MyApp(),
       );

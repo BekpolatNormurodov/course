@@ -21,4 +21,6 @@ class CoursesProvider extends ChangeNotifier {
       isLoading = false; notifyListeners();
     }
   }
+
+  void getData() {}
 }
