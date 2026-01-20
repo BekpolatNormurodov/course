@@ -31,7 +31,7 @@ class KursBannerClass {
 
   kursItem(CoursesModel data) {
     return GestureDetector(
-      onTap: ()=>Get.to(AboutCoursePage()),
+      onTap: () => Get.to(AboutCoursePage()),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 10.h),
         child: Container(
@@ -45,10 +45,8 @@ class KursBannerClass {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Rasm (tepada)
-              SizedBox(
-                child: Image.network(data.image, fit: BoxFit.cover),
-              ),
-      
+              SizedBox(child: Image.network(data.image, fit: BoxFit.cover)),
+
               // Kontent
               Padding(
                 padding: EdgeInsets.only(top: 12.h),
@@ -57,7 +55,7 @@ class KursBannerClass {
                   children: [
                     // Muallif
                     Text(
-                     data.authorName,
+                      data.authorName,
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontFamily: 'Regular',
@@ -65,7 +63,7 @@ class KursBannerClass {
                       ),
                     ),
                     SizedBox(height: 4.h),
-      
+
                     // Sarlavha
                     Container(
                       padding: EdgeInsets.only(right: 6.w),
@@ -83,21 +81,55 @@ class KursBannerClass {
                       ),
                     ),
                     SizedBox(height: 8.h),
-      
+
                     // Yulduzlar + (5)
-                    
-                  Row(
+                    Row(
                       children: [
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 1 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 2 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 3 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 4 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        Icon(Icons.star, size: 13.sp, color: data.averageRating! >= 5 ?  Color(0xFFFFC107) :  Color.fromRGBO(0, 0, 0, 0.3)),
-                        SizedBox(width: 6.w),
+                        Icon(
+                          Icons.star,
+                          size: 12.sp,
+                          color:
+                              data.averageRating! >= 1
+                                  ? Color(0xFFFFC107)
+                                  : Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12.sp,
+                          color:
+                              data.averageRating! >= 2
+                                  ? Color(0xFFFFC107)
+                                  : Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12.sp,
+                          color:
+                              data.averageRating! >= 3
+                                  ? Color(0xFFFFC107)
+                                  : Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12.sp,
+                          color:
+                              data.averageRating! >= 4
+                                  ? Color(0xFFFFC107)
+                                  : Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 12.sp,
+                          color:
+                              data.averageRating! >= 5
+                                  ? Color(0xFFFFC107)
+                                  : Color.fromRGBO(0, 0, 0, 0.3),
+                        ),
+                        SizedBox(width: 4.w),
                         Text(
                           "(${data.averageRating})",
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 11.sp,
                             color: Color.fromRGBO(95, 100, 110, 1),
                             fontWeight: FontWeight.w600,
                           ),
@@ -105,7 +137,7 @@ class KursBannerClass {
                       ],
                     ),
                     SizedBox(height: 8.h),
-      
+
                     // Narx
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -131,7 +163,7 @@ class KursBannerClass {
                       ],
                     ),
                     SizedBox(height: 8.h),
-      
+
                     // Statistikalar
                     Row(
                       children: [
@@ -141,7 +173,10 @@ class KursBannerClass {
                           color: Color.fromRGBO(0, 0, 0, 0.3),
                         ),
                         SizedBox(width: 6.w),
-                        Text(data.addedUser.toString(), style: TextStyle(fontSize: 14.sp)),
+                        Text(
+                          data.addedUser.toString(),
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
                         SizedBox(width: 22.w),
                         Icon(
                           Icons.person_outline,
@@ -149,7 +184,10 @@ class KursBannerClass {
                           color: Color.fromRGBO(0, 0, 0, 0.3),
                         ),
                         SizedBox(width: 6.w),
-                        Text(data.soldCount.toString(), style: TextStyle(fontSize: 14.sp)),
+                        Text(
+                          data.soldCount.toString(),
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
                       ],
                     ),
                   ],

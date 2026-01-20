@@ -1,6 +1,6 @@
 import 'package:course/Repository/banner/banner_model.dart';
 import 'package:course/Repository/banner/banner_provider.dart';
-import 'package:course/Repository/mentor%20banner/mentorbanner_provider.dart';
+import 'package:course/Repository/mentor_banner/mentorbanner_provider.dart';
 import 'package:course/library.dart';
 
 Color kBlue = Color.fromRGBO(53, 114, 237, 1);

@@ -9,6 +9,7 @@ class CoursesModel {
   final String descriptionEn;
   final String descriptionRu;
 
+
   final String shortDescUz;
   final String shortDescEn;
   final String shortDescRu;

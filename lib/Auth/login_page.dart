@@ -31,179 +31,29 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     Color blue = Color.fromRGBO(53, 114, 237, 1);
 
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          color: blue,
-          child: SafeArea(
-            bottom: false,
-            child: Column(
-              children: [
-                SizedBox(height: 50.h),
-                // Logo
-                Container(
-                  width: 180.w,
-                  height: 100.h,
-                  decoration: BoxDecoration(color: Colors.white),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Logo',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: 'SemiBold',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        // White card part
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 6.r,
-                  offset: Offset(0, -2),
-                ),
-              ],
-            ),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 60.h),
+            color: blue,
+            child: SafeArea(
+              bottom: false,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title
-                  Text(
-                    'Tizimga kirish',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'SemiBold',
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-
-                  // Google button
-                  _AuthButton(
-                    icon: "google",
-                    label: 'Google orqali davom ettirish',
-                    onTap: () {},
-                  ),
-                  SizedBox(height: 18.h),
-
-                  // Apple button
-                  _AuthButton(
-                    icon: "apple",
-                    label: 'Sign up with Apple',
-                    onTap: () {},
-                  ),
-                  SizedBox(height: 18.h),
-
-                  // Divider text
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 1.h,
-                          color: Colors.grey.shade300,
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        'Yoki telefon raqam orqali davom ettiring',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: Container(
-                          height: 1.h,
-                          color: Colors.grey.shade300,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-
-                  // Label
-                  Text(
-                    'Telefon raqami',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'regular',
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  // Phone input
-                  TextFormField(
-                    keyboardType: TextInputType.phone,
-                    inputFormatters: [phoneMask],
-                    cursorColor: Color.fromRGBO(0, 0, 0, 0.8),
-                    controller: controller,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromRGBO(238, 240, 245, 1),
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 14.w,
-                        vertical: 16.h,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(238, 240, 245, 1),
-                          width: 1.w,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(0, 0, 0, .5),
-                          width: 0.5.w,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-
-                  // Submit button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48.h,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final raw =
-                            phoneMask
-                                .getUnmaskedText(); // raqamni maskasiz holatga qaytaradi.
-                        Get.to(SmsCodePage(phone: formatPhone(raw)));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24.r),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        'Tizimga kirish',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16.sp,
-                        ),
+                  SizedBox(height: 50.h),
+                  // Logo
+                  Container(
+                    width: 180.w,
+                    height: 100.h,
+                    decoration: BoxDecoration(color: Colors.white),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Logo',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: 'SemiBold',
                       ),
                     ),
                   ),
@@ -211,8 +61,173 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-        ),
-      ],
+
+          // White card part
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6.r,
+                    offset: Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 60.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      'Tizimga kirish',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'SemiBold',
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Google button
+                    _AuthButton(
+                      icon: "google",
+                      label: 'Google orqali davom ettirish',
+                      onTap: () {},
+                    ),
+                    SizedBox(height: 18.h),
+
+                    // Apple button
+                    _AuthButton(
+                      icon: "apple",
+                      label: 'Sign up with Apple',
+                      onTap: () {},
+                    ),
+                    SizedBox(height: 18.h),
+
+                    // Divider text
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 1.h,
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          'Yoki telefon raqam orqali davom ettiring',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: Container(
+                            height: 1.h,
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16.h),
+
+                    // Label
+                    Text(
+                      'Telefon raqami',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'regular',
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    // Phone input
+                    TextFormField(
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [phoneMask],
+                      cursorColor: Color.fromRGBO(0, 0, 0, 0.8),
+                      controller: controller,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Color.fromRGBO(238, 240, 245, 1),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 14.w,
+                          vertical: 16.h,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: Color.fromRGBO(238, 240, 245, 1),
+                            width: 1.w,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                            color: Color.fromRGBO(0, 0, 0, .5),
+                            width: 0.5.w,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+
+                    // Submit button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 48.h,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final raw = phoneMask.getUnmaskedText();
+
+                          // Telefon raqam to'liq kiritilganini tekshirish (9 ta raqam)
+                          if (raw.length == 9) {
+                            // SMS code page ga o'tish
+                            final formattedPhone = formatPhone(raw);
+                            Get.to(() => SmsCodePage(phone: formattedPhone));
+                          } else {
+                            // Xatolik xabari
+                            Get.snackbar(
+                              'Xatolik',
+                              'Iltimos, telefon raqamini to\'liq kiriting',
+                              backgroundColor: Colors.red.shade100,
+                              colorText: Colors.red.shade900,
+                              snackPosition: SnackPosition.TOP,
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: blue,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Tizimga kirish',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -257,7 +272,9 @@ class _AuthButton extends StatelessWidget {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("assets/icons/$icon.png")),
+                  image: DecorationImage(
+                    image: AssetImage("assets/icons/$icon.png"),
+                  ),
                 ),
               ),
               SizedBox(width: 12),

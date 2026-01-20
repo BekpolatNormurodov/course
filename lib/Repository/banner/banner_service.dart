@@ -2,14 +2,13 @@
 import 'dart:convert';
 import 'package:course/Repository/banner/banner_model.dart';
 import 'package:http/http.dart' as http;
+import '../../config/api_config.dart';
 
 class BannerService {
-  static const String _baseUrl = 'https://api.faksa.uz';
-
   /// Bannerlarni olish uchun asosiy metod
   Future<List<BannerModel>> getBanners() async {
     try {
-      final uri = Uri.parse('$_baseUrl/banner');
+      final uri = Uri.parse('${ApiConfig.baseUrl}/banner');
 
       final response = await http.get(
         uri,

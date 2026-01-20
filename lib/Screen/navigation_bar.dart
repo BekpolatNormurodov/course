@@ -1,5 +1,6 @@
 import 'package:course/library.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:course/Screen/rating_page.dart';
 
 class NavigatorBar extends StatefulWidget {
   NavigatorBar({super.key});
@@ -13,7 +14,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
 
   @override
   Widget build(BuildContext context) {
-    List page = [AsosiyPage(), KurslarPage(), LoginPage(), ProfilePage()];
+    List page = [AsosiyPage(), KurslarPage(), RatingPage(), ProfilePage()];
     return Scaffold(
       body: page[_currentIndex],
       bottomNavigationBar: _BottomBar(
@@ -42,10 +43,10 @@ class _BottomBar extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(18.r),
-            topRight: Radius.circular(18.r),
-          ),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(18.r),
+          topRight: Radius.circular(18.r),
+        ),
         child: BottomNavigationBar(
           elevation: 8,
           backgroundColor: Colors.white,
@@ -69,7 +70,7 @@ class _BottomBar extends StatelessWidget {
               label: 'Reyting',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.person,),
+              icon: Icon(CupertinoIcons.person),
               label: 'Profil',
             ),
           ],

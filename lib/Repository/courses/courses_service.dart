@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'courses_model.dart';
+import '../../config/api_config.dart';
 
 class CoursesService {
-  final _base = Uri.parse('https://api.faksa.uz/courses');
+  final _base = Uri.parse('${ApiConfig.baseUrl}/courses');
 
   Future<List<CoursesModel>> fetchCourses() async {
     final r = await http
@@ -16,9 +17,10 @@ class CoursesService {
     }
 
     final decoded = jsonDecode(r.body);
-    final List list = (decoded is Map && decoded['data'] is List)
-        ? decoded['data'] as List
-        : (decoded is List ? decoded : []);
+    final List list =
+        (decoded is Map && decoded['data'] is List)
+            ? decoded['data'] as List
+            : (decoded is List ? decoded : []);
 
     return list
         .map((e) => CoursesModel.fromJson(e as Map<String, dynamic>))

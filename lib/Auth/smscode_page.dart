@@ -224,7 +224,21 @@ class _SmsCodePageState extends State<SmsCodePage> {
                   width: double.infinity,
                   height: 54.h,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(PersonalDataPage()),
+                    onPressed: () {
+                      // SMS kod tekshirish (hozircha faqat 6 ta raqam kiritilganini tekshiramiz)
+                      if (_pinController.text.length == 6) {
+                        // PersonalDataPage ga o'tish (login flow)
+                        Get.off(() => PersonalDataPage(isFromLogin: true));
+                      } else {
+                        Get.snackbar(
+                          'Xatolik',
+                          'Iltimos, 6 raqamli kodni to\'liq kiriting',
+                          backgroundColor: Colors.red.shade100,
+                          colorText: Colors.red.shade900,
+                          snackPosition: SnackPosition.TOP,
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: blue,
                       foregroundColor: Colors.white,
